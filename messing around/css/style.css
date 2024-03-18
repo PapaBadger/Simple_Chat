@@ -1,0 +1,69 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    width: 80%;
+}
+.chat-container {
+    display: flex; /* Add flex display */
+    flex-direction: column; /* Set flex direction to column */
+    height: 500px; /* Set fixed height */
+    width: 80%; /* Set width to 100% */
+    background-color: #f2f2f2;
+}
+
+.messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px; /* Move padding to .messages */
+}
+
+.tabs {
+    width: 20;
+    flex: 1;
+    height: 500px; /* Set fixed height */
+    padding: 10px; /* Reduce padding */
+    background-color: #e6e6e6;
+    overflow: hidden; /* Add overflow */
+
+}
+
+.input-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.input-field {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.tab-content {
+    width: 100%;
+    height: 440px;
+    background-color: #6e729f;
+    color:#e6e6e6;
+    overflow: auto;
+    padding: 10px;
+}
+
+.nav-item {
+    padding: 0px; /* Reduce padding */
+}
+
+.nav-tabs .nav-link {
+    border-radius: 0%;
+    color: #6e729f;
+    font-weight: bold;
+}
+
+.nav-tabs .nav-link.active {
+    font-weight: bold;
+    background-color: #6e729f;
+    color: #e6e6e6;
+    border-color: #6e729f;
+    border-radius: 0%;
+}
