@@ -1,3 +1,10 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+}
+
 .container {
     display: flex;
     justify-content: center;
@@ -9,8 +16,9 @@
     display: flex; /* Add flex display */
     flex-direction: column; /* Set flex direction to column */
     height: 500px; /* Set fixed height */
-    width: 80%; /* Set width to 100% */
-    background-color: #f2f2f2;
+    width: 80%;
+    background-color: #000000;
+    color: #e6e6e6;
 }
 
 .messages {
@@ -19,12 +27,16 @@
     padding: 20px; /* Move padding to .messages */
 }
 
+.message strong {
+    color: #5b609b;
+}
 .tabs {
-    width: 20;
+    width: 20%;
     flex: 1;
     height: 500px; /* Set fixed height */
-    padding: 10px; /* Reduce padding */
-    background-color: #e6e6e6;
+    padding-top: 0px; /* Remove padding */
+    padding-left: 10px; /* Add padding */
+    background-color: #343a40;
     overflow: hidden; /* Add overflow */
 
 }
@@ -43,27 +55,41 @@
 
 .tab-content {
     width: 100%;
-    height: 440px;
-    background-color: #6e729f;
+    height: 500px;
+    background-color: #5b609b;
     color:#e6e6e6;
     overflow: auto;
     padding: 10px;
+
 }
 
 .nav-item {
     padding: 0px; /* Reduce padding */
 }
+.nav-tabs {
+    border-bottom: 0px; /* Remove border */
+} 
 
-.nav-tabs .nav-link {
+.nav-tabs 
+.nav-link {
     border-radius: 0%;
-    color: #6e729f;
+    color: #5b609b;
     font-weight: bold;
 }
 
+
 .nav-tabs .nav-link.active {
     font-weight: bold;
-    background-color: #6e729f;
+    background-color: #5b609b;
     color: #e6e6e6;
-    border-color: #6e729f;
+    border-color: #5b609b;
     border-radius: 0%;
+}
+.send-button {
+    background-color: #5b609b;
+    color: #e6e6e6;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 2px;
+    cursor: pointer;
 }
