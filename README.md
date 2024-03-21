@@ -1,6 +1,15 @@
 # Simple_Chat
 ITP Semester Project, BIF 2
 
+21.03.24 : 11:39
+changed index.html to index.php
+
+includes profile.php
+
+fixed navbar and connected index.php with profile.php
+
+created navbar.php --> navbar now via include
+
 21.03.24 : 10:30 
 Added previous Ajax homework to the project as the backend structure will help with implementation of
 chat logic. It is currently not hooked into index.html
