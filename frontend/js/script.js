@@ -47,7 +47,7 @@ function insert_username(username){
     $.ajax({
         url: '../backend/businesslogic/db/insertUser.php',
         method: 'POST',
-        data: { name: username },
+        data: { username: username },
         success: function() {
             //debug
             console.log('Name saved successfully' + username);

@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO messages (comment, userid) 
             VALUES (?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("si", $comment);
+    $stmt->bind_param("si", $comment, $userid);
 
     // wird ausgeführt
     if ($stmt->execute()) {
