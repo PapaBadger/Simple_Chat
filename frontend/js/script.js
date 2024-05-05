@@ -86,7 +86,7 @@ function escapeRegExp(text) {
 }
 
 
-//----Dropdown
+//----PopUp Settings
 
 // Function to open settings popup
 function openSettings() {
@@ -98,7 +98,7 @@ function closeSettings() {
     document.getElementById('settings-popup').style.display = 'none';
 }
 
-// Function to save settings (nickname and chat color)
+// Function to save settings (nickname and username color)
 function saveSettings() {
     var newNickname = document.getElementById('new-nickname').value;
     var chatColor = document.getElementById('chat-color').value;
