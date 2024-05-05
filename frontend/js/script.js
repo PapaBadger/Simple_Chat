@@ -57,3 +57,26 @@ function insert_username(username){
         }
     });
 }
+
+// -------------- Emoji Replacment
+
+function replaceEmojis() {
+  const emojiMap = {
+      ':)': '😊',
+      'XD': '😆',
+      ':(': '😢',
+      ':P': '😜',
+      ';)': '😉'
+  };
+
+  let inputText = document.getElementById('textInput').value;
+  for (let text in emojiMap) {
+      let regex = new RegExp(escapeRegExp(text), 'g');
+      inputText = inputText.replace(regex, emojiMap[text]);
+  }
+  document.getElementById('output').innerHTML = inputText;
+}
+
+function escapeRegExp(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+}
