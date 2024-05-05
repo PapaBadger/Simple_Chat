@@ -32,3 +32,10 @@ function submitComment() {
 
     document.getElementById("message").value = ""; 
 }
+
+fetch('../backend/businesslogic/db/testConnection.php')
+    .then(response => response.text())
+    .then(data => console.log(data))
+    .catch((error) => {
+      console.error('Error:', error);
+    });
