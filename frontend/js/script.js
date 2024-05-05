@@ -1,4 +1,3 @@
-
 //yoinked from memory game assignment and modified
 let username = sessionStorage.getItem('username'); // Retrieve username from session storage
 
@@ -20,15 +19,5 @@ document.getElementById('usernameInput').addEventListener('input', function() {
     console.log('Username updated:', this.value);
 });
 
+//Settings
 
-// Function to show settings dropdown
-function showSettings() {
-  // Implement your logic to handle showing the settings dropdown
-  console.log("Show settings dropdown");
-}
-
-// Function to change theme
-function changeTheme() {
-  // Implement your logic to handle changing the theme
-  console.log("Change theme");
-}
