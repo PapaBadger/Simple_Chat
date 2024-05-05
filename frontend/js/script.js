@@ -19,3 +19,16 @@ document.getElementById('usernameInput').addEventListener('input', function() {
     sessionStorage.setItem('username', this.value);
     console.log('Username updated:', this.value);
 });
+
+
+// Function to show settings dropdown
+function showSettings() {
+  // Implement your logic to handle showing the settings dropdown
+  console.log("Show settings dropdown");
+}
+
+// Function to change theme
+function changeTheme() {
+  // Implement your logic to handle changing the theme
+  console.log("Change theme");
+}
