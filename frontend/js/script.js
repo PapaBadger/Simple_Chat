@@ -10,7 +10,11 @@ function askUsername() {
 
 function init() {
     askUsername(); // Ask the user for their username if not already set
+    insert_username(username); // Insert the username into the database
     document.getElementById('username').innerText = username; // Update the username in the HTML document
+    console.log('Username:', username); // Log the username to the console
+    // Add event listener for the send button
+    document.getElementById('send-button').addEventListener('click', sendMessage); 
 }
 
 // Function to show settings dropdown
@@ -26,10 +30,6 @@ function changeTheme() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
-document.getElementById('username').addEventListener('input', function() {
-    sessionStorage.setItem('username', this.value);
-    console.log('Username updated:', this.value);
-});
 
 // Function to show settings dropdown
 function showSettings() {
