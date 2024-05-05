@@ -2,31 +2,30 @@
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
     include 'dbConnect.php';
 
-    //Variablen werden gesetzt
-    $comment = $_POST['message'];
-    //$userid = $_POST['userid'];
+    // Überprüfen, ob der Benutzer angemeldet ist
+    
+        // Variablen setzen
+        $message = $_POST['message'];
+        $userid = $_SESSION['userid'];// Benutzer-ID aus der Session holen
 
-    // SQL statement wird vorbereitet um Daten hinzuzufügen
-    $sql = "INSERT INTO messages (comment, userid) 
-            VALUES (?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("si", $comment, $userid);
+        // SQL-Statement vorbereiten
+        $sql = "INSERT INTO messages (message, userid) VALUES (?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("si", $message, $userid);
 
-    // wird ausgeführt
-    if ($stmt->execute()) {
-        echo "Comment inserted successfully";
+        // Ausführen der SQL-Abfrage
+        if ($stmt->execute()) {
+            echo "Message inserted successfully";
+        } else {
+            echo "Error inserting message: " . $conn->error;
+        }
 
-    } else {
-        echo "Error inserting appointment: " . $conn->error;
-    }
-
-    //Connection geclosed
-    $stmt->close();
-    $conn->close();
-} else {
-    echo "Error: Invalid request method";
+        // Statement und Verbindung schließen
+        $stmt->close();
+        $conn->close();
 }
 ?>
+
+

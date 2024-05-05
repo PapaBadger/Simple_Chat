@@ -12,14 +12,18 @@ function askUsername() {
 }
 
 function init() {
-    askUsername();
-    insert_username(username);
-    document.getElementById('username').innerText = username;
-    console.log('Username:', username);
-    document.getElementById('send-button').addEventListener('click', replaceEmojis);
+    askUsername(); // Ask the user for their username if not already set
+    insert_username(username); // Insert the username into the database
+    document.getElementById('username').innerText = username; // Update the username in the HTML document
+    console.log('Username:', username); // Log the username to the console
+    // Add event listener for the send button
+    document.getElementById('send-button').addEventListener('click',replaceEmojis); 
+}
 
-    // Add event listener for changing theme
-    document.getElementById('theme-selector').addEventListener('change', changeTheme);
+// Function to show settings dropdown
+function showSettings() {
+  // Implement your logic to handle showing the settings dropdown
+  console.log("Show settings dropdown");
 }
 
 // Function to change theme
@@ -31,8 +35,31 @@ function changeTheme() {
 
 document.addEventListener('DOMContentLoaded', init);
 
-function insert_username(username) {
-    // Your AJAX call to insert username into database
+// Function to show settings dropdown
+function showSettings() {
+  // Implement your logic to handle showing the settings dropdown
+  console.log("Show settings dropdown");
+}
+
+// Function to change theme
+function changeTheme() {
+  // Implement your logic to handle changing the theme
+  console.log("Change theme");
+}
+
+function insert_username(username){
+    $.ajax({
+        url: '../backend/businesslogic/db/insertUser.php',
+        method: 'POST',
+        data: { username: username },
+        success: function() {
+            //debug
+            console.log('Name saved successfully' + username);
+        },
+        error: function(error) {
+            console.error('Error saving name:', error);
+        }
+    });
 }
 
 // -------------- Emoji Replacement
