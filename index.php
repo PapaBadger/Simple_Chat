@@ -52,7 +52,7 @@
                                 /csharp
                             </li>                                <li class="list-item">
                                 /javascript
-                            </li>                                <li class="list-item">
+</li>                                <li class="list-item">
                                 /java
                             </li>                                <li class="list-item">
                                 /htmlcss
@@ -66,10 +66,11 @@
     </div>
     <div class="container bg-dark">
         <div class="input-container">
-            <input type="text" class="input-field" placeholder="Type your message...">
-            <button class="send-button"> >> </button>
+            <textarea class="input-field" id="text" rows="1" placeholder="Type your message..."></textarea>
+            <button class="btn send-button"> >> </button>
         </div>
     </div>
+
     
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
