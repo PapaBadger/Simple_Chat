@@ -1,3 +1,9 @@
+$(document).ready(function() {
+    askUsername();
+    init();
+    insert_username(name);
+});
+
 
 //yoinked from memory game assignment and modified
 let username = sessionStorage.getItem('username'); // Retrieve username from session storage
@@ -31,4 +37,19 @@ function showSettings() {
 function changeTheme() {
   // Implement your logic to handle changing the theme
   console.log("Change theme");
+}
+
+function insert_username(name){
+    $.ajax({
+        url: '../backend/businesslogic/db/insertUser.php',
+        method: 'POST',
+        data: { name: name },
+        success: function() {
+            //debug
+            console.log('Name saved successfully' + name);
+        },
+        error: function(error) {
+            console.error('Error saving name:', error);
+        }
+    });
 }
