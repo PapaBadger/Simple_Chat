@@ -19,8 +19,7 @@ class SimpleLogic
                 $res = $this->dh->queryPersonById($param);
                 break;
             default:
-                $res = null;
-                break;
+                throw new Exception("Invalid method: $method");
         }
         return $res;
     }

@@ -1,18 +1,25 @@
 <?php
 include("businesslogic/simpleLogic.php");
 
-$param = "";
-$method = "";
+$param = $_GET["param"] ?? null;
+$method = $_GET["method"] ?? null;
 
-isset($_GET["method"]) ? $method = $_GET["method"] : false;
-isset($_GET["param"]) ? $param = $_GET["param"] : false;
+if (!$method || !$param) {
+    response("GET", 400, "Invalid request");
+    exit;
+}
 
 $logic = new SimpleLogic();
-$result = $logic->handleRequest($method, $param);
-if ($result == null) {
-    response("GET", 400, null);
-} else {
-    response("GET", 200, $result);
+
+try {
+    $result = $logic->handleRequest($method, $param);
+    if ($result == null) {
+        response("GET", 400, "No data found");
+    } else {
+        response("GET", 200, $result);
+    }
+} catch (Exception $e) {
+    response("GET", 500, $e->getMessage());
 }
 
 function response($method, $httpStatus, $data)
@@ -21,10 +28,10 @@ function response($method, $httpStatus, $data)
     switch ($method) {
         case "GET":
             http_response_code($httpStatus);
-            echo (json_encode($data));
+            echo json_encode($data);
             break;
         default:
             http_response_code(405);
-            echo ("Method not supported yet!");
+            echo json_encode("Method not supported yet!");
     }
 }

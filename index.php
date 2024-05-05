@@ -12,77 +12,7 @@
     <div class="container bg-dark">
         <div class="chat-container">
             <div class="messages">
-                <div class="message">
-                    <strong>John - 10:00 AM:</strong>
-                    <span>Hello there!</span>
-                </div>
-                <div class="message">
-                    <strong>John - 10:00 AM:</strong>
-                    <span>Hello there!</span>
-                </div>
-                <div class="message">
-                    <strong>John - 10:00 AM:</strong>
-                    <span>Hello there!</span>
-                </div>
-                <div class="message">
-                    <strong>Jane - 10:05 AM:</strong>
-                    <span>Hi John</span>
-                </div>
-                <div class="message">
-                    <strong>John - 10:10 AM:</strong>
-                    <span>How are you?</span>
-                </div>
-                <div class="message">
-                    <strong>Jane - 10:15 AM:</strong>
-                    <span>I'm good.</span>
-                </div>
-                <div class="message">
-                    <strong>John - 10:20 AM:</strong>
-                    <span>This is a long message that will wrap to the next line automatically if it exceeds the width of the container.</span>
-                </div>
-                <div class="message">
-                    <strong>Jane - 10:25 AM:</strong>
-                    <span>That's great to hear!</span>
-                </div>
-                <div class="message">
-                    <strong>John - 10:30 AM:</strong>
-                    <span>Yeah, it's really convenient.</span>
-                </div>
-                <div class="message">
-                    <strong>Jane - 10:35 AM:</strong>
-                    <span>I agree!</span>
-                </div>
-                <div class="message">
-                    <strong>John - 10:20 AM:</strong>
-                    <span>This is a long message that will wrap to the next line automatically if it exceeds the width of the container.</span>
-                </div>
-                <div class="message">
-                    <strong>Jane - 10:25 AM:</strong>
-                    <span>That's great to hear!</span>
-                </div>
-                <div class="message">
-                    <strong>John - 10:30 AM:</strong>
-                    <span>Yeah, it's really convenient.</span>
-                </div>
-                <div class="message">
-                    <strong>Jane - 10:35 AM:</strong>
-                    <span>I agree!</span>
-                </div>                <div class="message">
-                    <strong>John - 10:20 AM:</strong>
-                    <span>This is a long message that will wrap to the next line automatically if it exceeds the width of the container.</span>
-                </div>
-                <div class="message">
-                    <strong>Jane - 10:25 AM:</strong>
-                    <span>That's great to hear!</span>
-                </div>
-                <div class="message">
-                    <strong>John - 10:30 AM:</strong>
-                    <span>Yeah, it's really convenient.</span>
-                </div>
-                <div class="message">
-                    <strong>Jane - 10:35 AM:</strong>
-                    <span>I agree!</span>
-                </div>
+                <!-- Messages will be displayed here -->
             </div>
         </div>
         <div class="tabs">

@@ -1,22 +1,23 @@
 <?php
 include("./models/person.php");
+
 class DataHandler
 {
     public function queryPersons()
     {
+        // Replace with actual database query
         $res =  $this->getDemoData();
         return $res;
     }
 
     public function queryPersonById($id)
     {
-        $result = array();
         foreach ($this->queryPersons() as $val) {
             if ($val[0]->id == $id) {
-                array_push($result, $val);
+                return $val;
             }
         }
-        return $result;
+        throw new Exception("No person found with id: $id");
     }
 
     private static function getDemoData()
