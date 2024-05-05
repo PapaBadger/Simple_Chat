@@ -2,91 +2,61 @@
 let username = sessionStorage.getItem('username'); // Retrieve username from session storage
 
 function askUsername() {
-  while (!username || username.trim() === '') {
-      username = prompt('Please enter your username to proceed:'); // Ask the user for their username
-      if (!username || username.trim() === '') {
-          alert('Please enter your name to proceed.'); // Display error message if username is empty
-      }
-  }
-  sessionStorage.setItem('username', username); // Store the username in session storage
+    while (!username || username.trim() === '') {
+        username = prompt('Please enter your username to proceed:');
+        if (!username || username.trim() === '') {
+            alert('Please enter your name to proceed.');
+        }
+    }
+    sessionStorage.setItem('username', username);
 }
-
 
 function init() {
-    askUsername(); // Ask the user for their username if not already set
-    insert_username(username); // Insert the username into the database
-    document.getElementById('username').innerText = username; // Update the username in the HTML document
-    console.log('Username:', username); // Log the username to the console
-    // Add event listener for the send button
-    document.getElementById('send-button').addEventListener('click',replaceEmojis); 
-}
+    askUsername();
+    insert_username(username);
+    document.getElementById('username').innerText = username;
+    console.log('Username:', username);
+    document.getElementById('send-button').addEventListener('click', replaceEmojis);
 
-// Function to show settings dropdown
-function showSettings() {
-  // Implement your logic to handle showing the settings dropdown
-  console.log("Show settings dropdown");
+    // Add event listener for changing theme
+    document.getElementById('theme-selector').addEventListener('change', changeTheme);
 }
 
 // Function to change theme
 function changeTheme() {
-  // Implement your logic to handle changing the theme
-  console.log("Change theme");
+    let selectedTheme = document.getElementById('theme-selector').value;
+    // Implement logic to change theme based on selectedTheme
+    document.body.style.backgroundColor = selectedTheme;
 }
 
 document.addEventListener('DOMContentLoaded', init);
 
-// Function to show settings dropdown
-function showSettings() {
-  // Implement your logic to handle showing the settings dropdown
-  console.log("Show settings dropdown");
+function insert_username(username) {
+    // Your AJAX call to insert username into database
 }
 
-// Function to change theme
-function changeTheme() {
-  // Implement your logic to handle changing the theme
-  console.log("Change theme");
-}
-
-function insert_username(username){
-    $.ajax({
-        url: '../backend/businesslogic/db/insertUser.php',
-        method: 'POST',
-        data: { username: username },
-        success: function() {
-            //debug
-            console.log('Name saved successfully' + username);
-        },
-        error: function(error) {
-            console.error('Error saving name:', error);
-        }
-    });
-}
-
-// -------------- Emoji Replacment
+// -------------- Emoji Replacement
 
 function replaceEmojis() {
-  const emojiMap = {
-      ':)': '😊',
-      'XD': '😆',
-      ':(': '😢',
-      ':P': '😜',
-      ';)': '😉'
-  };
+    const emojiMap = {
+        ':)': '😊',
+        'XD': '😆',
+        ':(': '😢',
+        ':P': '😜',
+        ';)': '😉'
+    };
 
-  let inputText = document.getElementById('message').value;
-  for (let text in emojiMap) {
-      let regex = new RegExp(escapeRegExp(text), 'g');
-      inputText = inputText.replace(regex, emojiMap[text]);
-  }
-  document.getElementById('output').innerHTML = inputText;
+    let inputText = document.getElementById('message').value;
+    for (let text in emojiMap) {
+        let regex = new RegExp(escapeRegExp(text), 'g');
+        inputText = inputText.replace(regex, emojiMap[text]);
+    }
+    document.getElementById('output').innerHTML = inputText;
 }
 
 function escapeRegExp(text) {
-  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 }
-
-
-//----PopUp Settings
 
 // Function to open settings popup
 function openSettings() {
@@ -100,24 +70,18 @@ function closeSettings() {
 
 // Function to save settings (nickname and username color)
 function saveSettings() {
-    var newNickname = document.getElementById('new-nickname').value;
-    var chatColor = document.getElementById('chat-color').value;
-    
-    // Implement logic to save the new nickname and chat color
-    // For demonstration, just update the display with the new values
+    let newNickname = document.getElementById('new-nickname').value;
+    let chatColor = document.getElementById('chat-color').value;
+
     document.getElementById('username').textContent = newNickname;
     document.getElementById('output').style.color = chatColor;
-    
-    // Update the username in the database
+
     insert_username(newNickname);
-    
-    // Display the name change message in the chatroom
-    var message = username + ' changed their name to ' + newNickname;
+
+    let message = username + ' changed their name to ' + newNickname;
     document.getElementById('output').innerHTML = message;
-    
-    // Log the name change message to the console
+
     console.log(message);
-    
-    // Close the settings popup
+
     closeSettings();
 }
