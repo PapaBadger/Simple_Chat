@@ -3,10 +3,15 @@ $(document).ready(function () {
     
     // Funktion zum Senden einer Nachricht
     function sendMessage() {
-        var message = $("#message").val(); // Text aus dem Textbereich erhalten
-    var username = $("#username").val(); // Replace "#username" with the actual ID of your username input field
+        var text = $('#message').val(); // Replace 'your-input-field-id' with the actual ID of your input field
+        conn.send(JSON.stringify({
+            type: 'message',
+            text: text,
+            username: username
+        }));
 
     console.log("Message: " + message); 
+    
 
     // Send the text to your server
     var message = {

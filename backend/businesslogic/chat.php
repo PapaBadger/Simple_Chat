@@ -12,7 +12,7 @@ class Chat implements MessageComponentInterface {
 
     public function onOpen(ConnectionInterface $conn) {
     $this->clients->attach($conn);
-    echo "New connection! ({$conn->resourceId}, {$conn->username})\n";
+    echo "New connection! ({$conn->resourceId})\n";
 }
 
     public function onMessage(ConnectionInterface $from, $msg) {
@@ -33,12 +33,12 @@ class Chat implements MessageComponentInterface {
                 ]));
             }
         }
-        echo "New message: {$responseText}\n";
-        $from->send(json_encode([
-            'type' => 'chat',
-            'username' => 'Server',
-            'text' => "Message received: {$responseText}"
-        ]));
+        //echo "New message: {$responseText}\n";
+        // $from->send(json_encode([
+        //     'type' => 'chat',
+        //     'username' => $username,
+        //     'text' => $responseText
+        // ]));
     }
 
     public function onClose(ConnectionInterface $conn) {
