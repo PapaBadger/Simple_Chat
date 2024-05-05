@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/settings.css"> <!-- Include separate CSS file for settings -->
 </head>
 <body>
     <div class="pt-3">
@@ -20,20 +21,16 @@
                         <li class="nav-item">
                             <a class="navbar-brand" href="#About">About</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Settings
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#" onclick="showSettings()">Change Nickname</a>
-                                <a class="dropdown-item" href="#" onclick="changeTheme()">Change Theme</a>
-                            </div>
+                        <li class="nav-item">
+                            <a class="navbar-brand" href="#" onclick="openSettings()">Settings</a>
                         </li>
                     </ul>
                 </div>
             </nav>   
         </div>
     </div>
+
+
     <div class="container bg-dark">
         <div class="chat-container">
             <div class="messages">
@@ -89,15 +86,14 @@
             </div>
         </div>       
     </div>
+
     <div class="container bg-dark">
         <div class="input-container">
-            <input type="text" id="message" class="input-field" placeholder="Type your message..." onkeypress="checkForEnter(event)">
-            <button class="send-button" onclick="submitComment()"> >> </button>
-            <span id="username"> </span><span style="color: #ffff;font-weight: bold; margin-right: 5px;">:</span>
-            <textarea class="input-field" id="message" rows="1" placeholder="Type your message..."></textarea>
-            <button class="btn send-button" onclick="sendMessage()"> >> </button>
+          <textarea class="input-field" id="message" rows="1" placeholder="Type your message..."></textarea>
+          <button class="send-button" onclick="sendMessage()"> >> </button>
+          <span id="username"> </span><span style="color: #ffff;font-weight: bold; margin-right: 5px;">:</span>
         </div>
-    </div>
+      </div>      
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
