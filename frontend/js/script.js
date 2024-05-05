@@ -14,7 +14,7 @@ function init() {
     document.getElementById('username').innerText = username; // Update the username in the HTML document
     console.log('Username:', username); // Log the username to the console
     // Add event listener for the send button
-    document.getElementById('send-button').addEventListener('click', sendMessage); 
+    document.getElementById('send-button').addEventListener('click',replaceEmojis); 
 }
 
 // Function to show settings dropdown
@@ -56,4 +56,64 @@ function insert_username(username){
             console.error('Error saving name:', error);
         }
     });
+}
+
+// -------------- Emoji Replacment
+
+function replaceEmojis() {
+  const emojiMap = {
+      ':)': '😊',
+      'XD': '😆',
+      ':(': '😢',
+      ':P': '😜',
+      ';)': '😉'
+  };
+
+  let inputText = document.getElementById('message').value;
+  for (let text in emojiMap) {
+      let regex = new RegExp(escapeRegExp(text), 'g');
+      inputText = inputText.replace(regex, emojiMap[text]);
+  }
+  document.getElementById('output').innerHTML = inputText;
+}
+
+function escapeRegExp(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+}
+
+
+//----Dropdown
+
+// Function to open settings popup
+function openSettings() {
+    document.getElementById('settings-popup').style.display = 'block';
+}
+
+// Function to close settings popup
+function closeSettings() {
+    document.getElementById('settings-popup').style.display = 'none';
+}
+
+// Function to save settings (nickname and chat color)
+function saveSettings() {
+    var newNickname = document.getElementById('new-nickname').value;
+    var chatColor = document.getElementById('chat-color').value;
+    
+    // Implement logic to save the new nickname and chat color
+    // For demonstration, just update the display with the new values
+    document.getElementById('username').textContent = newNickname;
+    document.getElementById('output').style.color = chatColor;
+    
+    // Update the username in the database
+    insert_username(newNickname);
+    
+    // Display the name change message in the chatroom
+    var message = username + ' changed their name to ' + newNickname;
+    document.getElementById('output').innerHTML = message;
+    
+    // Log the name change message to the console
+    console.log(message);
+    
+    // Close the settings popup
+    closeSettings();
 }
