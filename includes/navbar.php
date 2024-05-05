@@ -12,10 +12,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="navbar-brand" href="./profile.php" <?php echo $current_page == 'profile.php' ? 'class="active"' : '' ?>>Profile</a>
+                        <a class="navbar-brand" href="#About">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="navbar-brand" href="./settings.php" <?php echo $current_page == 'settings.php' ? 'class="active"' : '' ?>>Settings</a>
+                        <a class="navbar-brand" href="#Settings">Settings</a>
                     </li>
                 </ul>
             </div>
