@@ -38,6 +38,8 @@
         <div class="chat-container">
             <div class="messages">
                 <!-- Messages will be displayed here -->
+                <!-- test for outputs -->
+                <div id="output" contenteditable="true">Output will appear here...</div>
             </div>
         </div>
         <div class="tabs">
@@ -90,6 +92,10 @@
         </div>       
     </div>
     <div class="container bg-dark">
+        <!-- emoji test -->
+        <input type="text" id="textInput" placeholder="Type your message here... E.g., I am happy :)" />
+        <button onclick="replaceEmojis()">Replace Emojis</button>
+        
         <div class="input-container">
             <span id="username"></span><span style="color: #ffff;font-weight: bold; margin-right: 5px;">:</span>
             <textarea class="input-field" id="message" rows="1" placeholder="Type your message..."></textarea>
