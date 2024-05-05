@@ -14,7 +14,7 @@ function init() {
     document.getElementById('username').innerText = username; // Update the username in the HTML document
     console.log('Username:', username); // Log the username to the console
     // Add event listener for the send button
-    document.getElementById('send-button').addEventListener('click',replaceEmojis , sendMessage); 
+    document.getElementById('send-button').addEventListener('click',replaceEmojis); 
 }
 
 // Function to show settings dropdown
