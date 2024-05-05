@@ -1,10 +1,12 @@
 $(document).ready(function () {
     var conn = new WebSocket('ws://localhost:8080');
+    
+    // Funktion zum Senden einer Nachricht
     function sendMessage() {
-        var text = $("#message").val();
+        var message = $("#message").val(); // Text aus dem Textbereich erhalten
     var username = $("#username").val(); // Replace "#username" with the actual ID of your username input field
 
-    console.log("Message: " + text); 
+    console.log("Message: " + message); 
 
     // Send the text to your server
     var message = {
@@ -12,35 +14,39 @@ $(document).ready(function () {
         username: username,
         text: text
     };
+        var userid = sessionStorage.getItem('userid');
     
-        // Senden Sie den Text an Ihren Server
+        // Senden Sie die Nachricht an Ihren Server
         $.ajax({
             url: '../backend/businesslogic/db/insertMessage.php',
             type: 'POST',
             data: {
-                comment: text
+                message: message, // Nachricht als 'message' an das Skript senden
             },
             success: function(response) {
-                console.log("Message saved successfully:" + text);
+                console.log("Message saved successfully: " + response);
             },
             error: function(error) {
-                console.log("Error saving comment: ", error);
+                console.log("Error saving message: ", error);
             }
         });
     
         // Send the text to your server
         conn.send(JSON.stringify(message));
     
-        $("#message").val(""); 
+        $("#message").val(""); // Eingabefeld leeren, nachdem die Nachricht gesendet wurde
     }
 
-    $(".send-button").click(function() {
-        sendMessage();
+    // Event-Handler für den Klick auf den Senden-Button
+    $("#send-button").click(function() {
+        sendMessage(); // Nachricht senden, wenn der Button geklickt wird
     });
 
+    // Event-Handler für die WebSocket-Verbindung
     conn.onopen = function(e) {
         console.log("Connection established!", e);
     };
+
 
     conn.onmessage = function(e) {
         console.log('Server: ' + e.data);
@@ -62,5 +68,3 @@ $(document).ready(function () {
 
     
 });
-
-

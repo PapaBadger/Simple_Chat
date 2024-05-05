@@ -29,18 +29,27 @@
         </div>
     </div>
 
-    <!-- Settings Popup -->
-    <div id="settings-popup" class="settings-popup" style="display: none;">
-        <div class="settings-content">
-            <h2>Settings</h2>
-            <label for="new-nickname">New Nickname:</label>
-            <input type="text" id="new-nickname" placeholder="Enter your new nickname">
-            <label for="chat-color">Chat Color:</label>
-            <input type="color" id="chat-color" value="#000000">
-            <button onclick="saveSettings()">Save</button>
-            <button onclick="closeSettings()">Close</button>
-        </div>
+<!-- Settings Popup -->
+<div id="settings-popup" class="settings-popup" style="display: none;">
+    <div class="settings-content">
+        <h2>Settings</h2>
+        <label for="new-nickname">New Nickname:</label>
+        <input type="text" id="new-nickname" placeholder="Enter your new nickname">
+        <label for="chat-color">Text Color:</label>
+        <input type="color" id="chat-color" value="#000000">
+        <!-- Theme Selector Dropdown -->
+        <label for="theme-selector">Theme:</label>
+        <select id="theme-selector">
+            <option value="#ffffff">Light</option>
+            <option value="#000000">Dark</option>
+            <option value="#ff0000">Red</option>
+            <option value="#00ff00">Green</option>
+            <option value="#0000ff">Blue</option>
+        </select>
+        <button onclick="saveSettings()">Save</button>
+        <button onclick="closeSettings()">Close</button>
     </div>
+</div>
 
     <div class="container bg-dark">
         <div class="chat-container">
@@ -59,6 +68,7 @@
                     <li class="nav-item col-6">
                         <a class="nav-link" href="#tab2" data-toggle="tab">channels</a>
                     </li>
+                </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab1">
                         <p>
@@ -83,13 +93,17 @@
                         <p>
                             <li class="list-item">
                                 /python
-                            </li>                                <li class="list-item">
+                            </li>                                
+                            <li class="list-item">
                                 /csharp
-                            </li>                                <li class="list-item">
+                            </li>                                
+                            <li class="list-item">
                                 /javascript
-                            </li>                                <li class="list-item">
+                            </li>                                
+                            <li class="list-item">
                                 /java
-                            </li>                                <li class="list-item">
+                            </li>                                
+                            <li class="list-item">
                                 /htmlcss
                             </li>
                             <!-- Rest of the list items... -->
@@ -103,7 +117,7 @@
         <div class="input-container">
             <span id="username"></span><span style="color: #ffff;font-weight: bold; margin-right: 5px;">:</span>
             <textarea class="input-field" id="message" rows="1" placeholder="Type your message..."></textarea>
-            <button class="btn send-button" id= "send-button"> >> </button>
+            <button class="btn send-button" id="send-button">Send</button>
         </div>
     </div>
 

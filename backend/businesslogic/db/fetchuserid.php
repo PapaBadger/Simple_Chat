@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $userid = $row['userid'];
+            $_SESSION['userid'] = $userid;
             // Speichern der userid in der Variable $userid
         } else {
             echo "No user found with username: " . $username;
