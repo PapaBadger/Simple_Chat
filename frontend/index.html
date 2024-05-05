@@ -4,14 +4,10 @@
     <title>Chatroom</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css"></head>
-    <script src="../backend/simpleJsonClient/controller.js" type="text/javascript"></script>
-    <script src="js/script.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 <body>
-    <script src="../backend/simpleJsonClient/controller.js"></script>
     <div class="pt-3">
         <div class="container bg-dark">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -24,8 +20,14 @@
                         <li class="nav-item">
                             <a class="navbar-brand" href="#About">About</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="navbar-brand" href="#Settings">Settings</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Settings
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#" onclick="showSettings()">Change Nickname</a>
+                                <a class="dropdown-item" href="#" onclick="changeTheme()">Change Theme</a>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -75,7 +77,7 @@
                                 /csharp
                             </li>                                <li class="list-item">
                                 /javascript
-</li>                                <li class="list-item">
+                            </li>                                <li class="list-item">
                                 /java
                             </li>                                <li class="list-item">
                                 /htmlcss
@@ -89,14 +91,17 @@
     </div>
     <div class="container bg-dark">
         <div class="input-container">
-            <span id="username"> </span><span style="color: #ffff;font-weight: bold; margin-right: 5px;">:</span>
-            <textarea class="input-field" id="text" rows="1" placeholder="Type your message..."></textarea>
+            <span id="username"></span><span style="color: #ffff;font-weight: bold; margin-right: 5px;">:</span>
+            <textarea class="input-field" id="message" rows="1" placeholder="Type your message..."></textarea>
             <button class="btn send-button" onclick="sendMessage()"> >> </button>
         </div>
     </div>
 
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../backend/simpleJsonClient/controller.js" type="text/javascript"></script>
+    <script src="js/script.js" type="text/javascript"></script>
 </body>
 </html>
+

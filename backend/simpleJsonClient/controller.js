@@ -1,19 +1,35 @@
 $(document).ready(function () {
     $(".send-button").click(function() {
-        submitComment();
+        sendMessage();
     });
+
+    var conn = new WebSocket('ws://localhost:5500');
+    conn.onopen = function(e) {
+        console.log("Connection established!");
+    };
+
+
 });
 
-function checkForEnter(event) {
-    if (event.keyCode === 13) { 
-      event.preventDefault(); 
-      submitComment(); 
-    }
-}
 
-function submitComment() {
-    var text = document.getElementById("message").value;
+function sendMessage() {
+    var text = $("#message").val();
     console.log("Message: " + text); 
-    document.getElementById("message").value = ""; 
-}
 
+    // Senden Sie den Text an Ihren Server
+    $.ajax({
+        url: '../backend/businesslogic/db/insertMessage.php',
+        type: 'POST',
+        data: {
+            comment: text
+        },
+        success: function(response) {
+            console.log("Comment saved successfully:" + text);
+        },
+        error: function(error) {
+            console.log("Error saving comment: ", error);
+        }
+    });
+
+    $("#message").val(""); 
+}
