@@ -43,14 +43,14 @@ function changeTheme() {
   console.log("Change theme");
 }
 
-function insert_username(name){
+function insert_username(username){
     $.ajax({
         url: '../backend/businesslogic/db/insertUser.php',
         method: 'POST',
-        data: { name: name },
+        data: { name: username },
         success: function() {
             //debug
-            console.log('Name saved successfully' + name);
+            console.log('Name saved successfully' + username);
         },
         error: function(error) {
             console.error('Error saving name:', error);
