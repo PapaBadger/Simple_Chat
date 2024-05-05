@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css"></head>
 <body>
     <?php include './includes/navbar.php'; ?>
-
+    <script src="controller.js"></script>
     <div class="container bg-dark">
         <div class="chat-container">
             <div class="messages">

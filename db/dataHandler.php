@@ -1,33 +1,51 @@
 <?php
-include("./models/person.php");
+include("db_connect.php");
 
 class DataHandler
 {
-    public function queryPersons()
+    private $conn;
+
+    public function __construct()
     {
-        // Replace with actual database query
-        $res =  $this->getDemoData();
+        global $conn;
+        $this->conn = $conn;
+    }
+
+    public function getUsers()
+    {
+        $res = [];
+        $sql = "SELECT * FROM users";
+        $result = $this->conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $res[] = $row;
+            }
+        }
+
         return $res;
     }
 
-    public function queryPersonById($id)
+    public function getMessages()
     {
-        foreach ($this->queryPersons() as $val) {
-            if ($val[0]->id == $id) {
-                return $val;
+        $res = [];
+        $sql = "SELECT * FROM messages";
+        $result = $this->conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $res[] = $row;
             }
         }
-        throw new Exception("No person found with id: $id");
+
+        return $res;
     }
 
-    private static function getDemoData()
+    public function addMessage($userId, $message)
     {
-        $demodata = [
-            [new User(1, "personOne")],
-            [new User(2, "personTwo")],
-            [new User(3, "personThree")],
-            [new User(4, "personFour")],
-        ];
-        return $demodata;
+        $sql = "INSERT INTO messages (user_id, message) VALUES (?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("is", $userId, $message);
+        $stmt->execute();
     }
 }
