@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#messagebutton").click(function() {
+    $(".send-button").click(function() {
         sendMessage();
     });
 
@@ -10,6 +10,7 @@ $(document).ready(function () {
 
 
 });
+
 
 function sendMessage() {
     var text = $("#message").val();

@@ -1,10 +1,3 @@
-$(document).ready(function() {
-    askUsername();
-    init();
-    insert_username(name);
-});
-
-
 //yoinked from memory game assignment and modified
 let username = sessionStorage.getItem('username'); // Retrieve username from session storage
 
@@ -20,12 +13,23 @@ function init() {
     document.getElementById('username').innerText = username; // Update the username in the HTML document
 }
 
+// Function to show settings dropdown
+function showSettings() {
+  // Implement your logic to handle showing the settings dropdown
+  console.log("Show settings dropdown");
+}
+
+// Function to change theme
+function changeTheme() {
+  // Implement your logic to handle changing the theme
+  console.log("Change theme");
+}
+
 document.addEventListener('DOMContentLoaded', init);
 document.getElementById('usernameInput').addEventListener('input', function() {
     sessionStorage.setItem('username', this.value);
     console.log('Username updated:', this.value);
 });
-
 
 // Function to show settings dropdown
 function showSettings() {
