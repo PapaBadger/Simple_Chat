@@ -1,5 +1,7 @@
 //yoinked from memory game assignment and modified
 let username = sessionStorage.getItem('username'); // Retrieve username from session storage
+let nameColor = sessionStorage.getItem('nameColor'); // Retrieve chat color from session storage
+
 
 function askUsername() {
     while (!username || username.trim() === '') {
@@ -17,8 +19,14 @@ function init() {
     document.getElementById('username').innerText = username;
     console.log('Username:', username);
     document.getElementById('send-button').addEventListener('click', replaceEmojis);
-
+    document.getElementById("message").addEventListener("keydown", function(event) {
+        if (event.key === "Enter" && !event.shiftKey) { // Enter key without Shift
+            event.preventDefault(); // Prevent the default action of Enter key
+            document.getElementById("send-button").click(); // Trigger the click event of the send button
+        }
+    });
     // Add event listener for changing theme
+    document.getElementById('username').style.color = nameColor; // Set the color of the username
     document.getElementById('theme-selector').addEventListener('change', changeTheme);
 }
 
@@ -70,18 +78,30 @@ function closeSettings() {
 
 // Function to save settings (nickname and username color)
 function saveSettings() {
-    let newNickname = document.getElementById('new-nickname').value;
-    let chatColor = document.getElementById('chat-color').value;
-
+    var newNickname = document.getElementById('new-nickname').value;
+    var nameColor = document.getElementById('chat-color').value;
+    
+    // Implement logic to save the new nickname and chat color
+    // For demonstration, just update the display with the new values
     document.getElementById('username').textContent = newNickname;
-    document.getElementById('output').style.color = chatColor;
-
+    document.getElementById('username').style.color = nameColor; // Set the color of the username
+    
+    // Update the username in the database
     insert_username(newNickname);
+    // Update the username in session storage
+    sessionStorage.setItem('username', newNickname); // Store the username in session storage
+    //update username color in session storage
+    sessionStorage.setItem('nameColor', nameColor);
 
-    let message = username + ' changed their name to ' + newNickname;
+    console.log('Name Color:', nameColor);
+
+    // Display the name change message in the chatroom
+    var message = username + ' changed their name to ' + newNickname;
     document.getElementById('output').innerHTML = message;
-
+    
+    // Log the name change message to the console
     console.log(message);
-
+    
+    // Close the settings popup
     closeSettings();
 }

@@ -61,17 +61,20 @@
         </div>
         <div class="tabs">
             <div class="col">
-                <ul class="nav nav-tabs row" id="myTabs">
+                <ul class="nav nav-tabs row flex-row" id="myTabs">
                     <li class="nav-item col-6">
                         <a class="nav-link active" href="#tab1" data-toggle="tab">members</a>
                     </li>
                     <li class="nav-item col-6">
                         <a class="nav-link" href="#tab2" data-toggle="tab">channels</a>
                     </li>
-                </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab1">
-                        <p>
+                        <p class="list-group" id="users">
+                            <!-- List of users will be displayed here -->
+                            <li class="list-item current">
+                                 > <span id="username"/>
+                            </li>
                             <li class="list-item">
                                 pu$$ydestroyer69
                             </li>
@@ -85,7 +88,7 @@
                                 EmilyBrown123
                             </li>
                             <li class="list-item">
-                                cumblaster666
+                                cmblaster666
                             </li>
                         </p>
                     </div>
@@ -93,17 +96,13 @@
                         <p>
                             <li class="list-item">
                                 /python
-                            </li>                                
-                            <li class="list-item">
+                            </li>                                <li class="list-item">
                                 /csharp
-                            </li>                                
-                            <li class="list-item">
+                            </li>                                <li class="list-item">
                                 /javascript
-                            </li>                                
-                            <li class="list-item">
+                            </li>                                <li class="list-item">
                                 /java
-                            </li>                                
-                            <li class="list-item">
+                            </li>                                <li class="list-item">
                                 /htmlcss
                             </li>
                             <!-- Rest of the list items... -->
@@ -113,9 +112,9 @@
             </div>
         </div>       
     </div>
+
     <div class="container bg-dark">        
         <div class="input-container">
-            <span id="username"></span><span style="color: #ffff;font-weight: bold; margin-right: 5px;">:</span>
             <textarea class="input-field" id="message" rows="1" placeholder="Type your message..."></textarea>
             <button class="btn send-button" id="send-button">Send</button>
         </div>
