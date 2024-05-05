@@ -4,25 +4,51 @@ use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
 class Chat implements MessageComponentInterface {
-    public function onOpen(ConnectionInterface $conn) {
-        // Store the new connection
-        echo "New connection! ({$conn->resourceId})\n";
+    protected $clients;
+
+    public function __construct() {
+        $this->clients = new \SplObjectStorage;
     }
 
+    public function onOpen(ConnectionInterface $conn) {
+    $this->clients->attach($conn);
+    echo "New connection! ({$conn->resourceId}, {$conn->username})\n";
+}
+
     public function onMessage(ConnectionInterface $from, $msg) {
-        // Broadcast the message to all connections
-        echo "New message: {$msg}\n";
-        $from->send("Message received: {$msg}");
+        $messageData = json_decode($msg);
+        if ($messageData === null) {
+            // The message is not a valid JSON string.
+            return;
+        }
+        $username = $messageData->username;
+        $text = $messageData->text;
+        $responseText = "{$username}: {$text}";
+        foreach ($this->clients as $client) {
+            if ($from != $client) {
+                $client->send(json_encode([
+                    'type' => 'chat',
+                    'username' => $username,
+                    'text' => $responseText
+                ]));
+            }
+        }
+        echo "New message: {$responseText}\n";
+        $from->send(json_encode([
+            'type' => 'chat',
+            'username' => 'Server',
+            'text' => "Message received: {$responseText}"
+        ]));
     }
 
     public function onClose(ConnectionInterface $conn) {
-        // Remove the connection
+        $this->clients->detach($conn);
         echo "Connection {$conn->resourceId} has disconnected\n";
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) {
-        // Handle the error
         echo "An error has occurred: {$e->getMessage()}\n";
         $conn->close();
     }
 }
+

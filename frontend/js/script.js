@@ -17,6 +17,7 @@ function init() {
     insert_username(username); // Insert the username into the database
     document.getElementById('username').innerText = username; // Update the username in the HTML document
     console.log('Username:', username); // Log the username to the console
+    $('#username').val(username);
     // Add event listener for the send button
     document.getElementById('send-button').addEventListener('click',replaceEmojis); 
 }

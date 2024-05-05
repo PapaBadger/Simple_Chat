@@ -2,7 +2,16 @@ $(document).ready(function () {
     var conn = new WebSocket('ws://localhost:8080');
     function sendMessage() {
         var text = $("#message").val();
-        console.log("Message: " + text); 
+    var username = $("#username").val(); // Replace "#username" with the actual ID of your username input field
+
+    console.log("Message: " + text); 
+
+    // Send the text to your server
+    var message = {
+        type: 'chat',
+        username: username,
+        text: text
+    };
     
         // Senden Sie den Text an Ihren Server
         $.ajax({
@@ -20,7 +29,7 @@ $(document).ready(function () {
         });
     
         // Send the text to your server
-        conn.send(text);
+        conn.send(JSON.stringify(message));
     
         $("#message").val(""); 
     }
@@ -30,13 +39,26 @@ $(document).ready(function () {
     });
 
     conn.onopen = function(e) {
-        console.log("Connection established!");
+        console.log("Connection established!", e);
     };
+
     conn.onmessage = function(e) {
         console.log('Server: ' + e.data);
-        // Display the message in your web page
-        $('#messages').append('<p>' + e.data + '</p>');
-    };
+        try {
+            var startIndex = e.data.indexOf('{');
+            var jsonString = e.data.slice(startIndex);
+            console.log('Extracted JSON string:', jsonString);
+            var message = JSON.parse(jsonString);
+            if (message.type === 'chat') {
+                $('#messages').append('<p><strong>' + message.username + ':</strong> ' + message.text + '</p>');
+            } else if (message.type === 'notification') {
+                $('#messages').append('<p class="notification">' + message.text + '</p>');
+            }
+        } catch (error) {
+            console.log("Error parsing message: ", error);
+        }
+    
+};
 
     
 });
