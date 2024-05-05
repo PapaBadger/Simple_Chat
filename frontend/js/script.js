@@ -2,11 +2,15 @@
 let username = sessionStorage.getItem('username'); // Retrieve username from session storage
 
 function askUsername() {
-    if (!username) {
-        username = prompt('Enter your username:'); // Ask the user for their username
-        sessionStorage.setItem('username', username); // Store the username in session storage
-    }
+  while (!username || username.trim() === '') {
+      username = prompt('Please enter your username to proceed:'); // Ask the user for their username
+      if (!username || username.trim() === '') {
+          alert('Please enter your name to proceed.'); // Display error message if username is empty
+      }
+  }
+  sessionStorage.setItem('username', username); // Store the username in session storage
 }
+
 
 function init() {
     askUsername(); // Ask the user for their username if not already set
