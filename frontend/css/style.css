@@ -54,7 +54,7 @@ body {
 
 .input-field {
     flex: 1;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 .tab-content {
@@ -104,4 +104,11 @@ body {
 .send-button:hover {
     background-color: #464c8d;
     color: #e6e6e6;
+}
+
+#username {
+    color: #ffffff;
+    font-weight: bold;
+    margin-right: 5px;
+    margin-left: 0px;
 }
