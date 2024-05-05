@@ -24,7 +24,7 @@ function sendMessage() {
             comment: text
         },
         success: function(response) {
-            console.log("Comment saved successfully:" + text);
+            console.log("Message saved successfully:" + text);
         },
         error: function(error) {
             console.log("Error saving comment: ", error);

@@ -26,7 +26,7 @@ function changeTheme() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
-document.getElementById('usernameInput').addEventListener('input', function() {
+document.getElementById('username').addEventListener('input', function() {
     sessionStorage.setItem('username', this.value);
     console.log('Username updated:', this.value);
 });
