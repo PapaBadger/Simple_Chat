@@ -13,13 +13,16 @@ function checkForEnter(event) {
 
 function submitComment() {
     var text = document.getElementById("message").value;
-    console.log("Comment: " + text); 
+    console.log("Message: " + text); 
     document.getElementById("message").value = ""; 
 }
 
-fetch('../backend/businesslogic/db/testConnection.php')
-    .then(response => response.text())
-    .then(data => console.log(data))
-    .catch((error) => {
-      console.error('Error:', error);
-    });
+
+var conn = new WebSocket('ws://localhost:5500');
+conn.onopen = function(e) {
+    console.log("Connection established!");
+};
+
+conn.onmessage = function(e) {
+    console.log(e.data);
+};

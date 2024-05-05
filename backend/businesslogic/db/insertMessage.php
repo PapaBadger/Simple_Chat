@@ -2,23 +2,12 @@
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    include 'dbConnect.php';
+
     //Variablen werden gesetzt
-    $comment = $_POST['comment'];
+    $comment = $_POST['message'];
     $userid = $_POST['userid'];
-
-    // DB connection
-    $servername = "localhost";
-    $username = "Admin";
-    $password = "";
-    $database = "simplechat";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $database);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
 
     // SQL statement wird vorbereitet um Daten hinzuzufügen
     $sql = "INSERT INTO comments (comment, userid) 

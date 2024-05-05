@@ -29,19 +29,19 @@ GRANT ALL PRIVILEGES ON `simplechat`.* TO `Admin`@`localhost`;
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `comments`
+-- Tabellenstruktur für Tabelle `messages`
 --
 
-CREATE TABLE `comments` (
-  `comment` varchar(500) NOT NULL,
+CREATE TABLE `messages` (
+  `message` varchar(500) NOT NULL,
   `userid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Daten für Tabelle `comments`
+-- Daten für Tabelle `messages`
 --
 
-INSERT INTO `comments` (`comment`, `userid`) VALUES
+INSERT INTO `messages` (`message`, `userid`) VALUES
 ('Test', 1),
 ('Test', 1),
 ('asdf', 2);
@@ -70,9 +70,9 @@ INSERT INTO `user` (`username`, `userid`) VALUES
 --
 
 --
--- Indizes für die Tabelle `comments`
+-- Indizes für die Tabelle `messages`
 --
-ALTER TABLE `comments`
+ALTER TABLE `messages`
   ADD KEY `fk_UserID` (`userid`);
 
 --
@@ -96,9 +96,9 @@ ALTER TABLE `user`
 --
 
 --
--- Constraints der Tabelle `comments`
+-- Constraints der Tabelle `messages`
 --
-ALTER TABLE `comments`
+ALTER TABLE `messages`
   ADD CONSTRAINT `fk_UserID` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`);
 COMMIT;
 
