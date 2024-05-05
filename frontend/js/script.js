@@ -15,6 +15,7 @@ function askUsername() {
 function init() {
     askUsername(); // Ask the user for their username if not already set
     insert_username(username); // Insert the username into the database
+    fetchuserid(username);
     document.getElementById('username').innerText = username; // Update the username in the HTML document
     console.log('Username:', username); // Log the username to the console
     // Add event listener for the send button
@@ -58,6 +59,22 @@ function insert_username(username){
         },
         error: function(error) {
             console.error('Error saving name:', error);
+        }
+    });
+}
+
+function fetchuserid(username){
+    $.ajax({
+        url: '../backend/businesslogic/db/fetchuserid.php',
+        method: 'POST',
+        data: { username: username },
+        success: function(response) {
+            //debug
+            var userid = response;
+            console.log('UserID successfull: ', response);
+        },
+        error: function(error) {
+            console.log('Error:', error);
         }
     });
 }
