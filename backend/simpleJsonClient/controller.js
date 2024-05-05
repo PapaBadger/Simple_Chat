@@ -17,12 +17,3 @@ function submitComment() {
     document.getElementById("message").value = ""; 
 }
 
-
-var conn = new WebSocket('ws://localhost:5500');
-conn.onopen = function(e) {
-    console.log("Connection established!");
-};
-
-conn.onmessage = function(e) {
-    console.log(e.data);
-};
