@@ -1,28 +1,18 @@
 $(document).ready(function () {
-    $(".send-button").click(function() {
-        submitComment();
+    $("#messagebutton").click(function() {
+        sendMessage();
     });
+
+    var conn = new WebSocket('ws://localhost:5500');
+    conn.onopen = function(e) {
+        console.log("Connection established!");
+    };
+
+
 });
 
-function checkForEnter(event) {
-    if (event.keyCode === 13) { 
-      event.preventDefault(); 
-      submitComment(); 
-    }
-}
-
-function submitComment() {
-    var text = document.getElementById("message").value;
+function sendMessage() {
+    var text = $("#message").val();
     console.log("Message: " + text); 
-    document.getElementById("message").value = ""; 
+    $("#message").val(""); 
 }
-
-
-var conn = new WebSocket('ws://localhost:5500');
-conn.onopen = function(e) {
-    console.log("Connection established!");
-};
-
-conn.onmessage = function(e) {
-    console.log(e.data);
-};

@@ -93,6 +93,9 @@
         <div class="input-container">
             <input type="text" id="message" class="input-field" placeholder="Type your message..." onkeypress="checkForEnter(event)">
             <button class="send-button" onclick="submitComment()"> >> </button>
+            <span id="username"> </span><span style="color: #ffff;font-weight: bold; margin-right: 5px;">:</span>
+            <textarea class="input-field" id="message" rows="1" placeholder="Type your message..."></textarea>
+            <button class="btn send-button" onclick="sendMessage()"> >> </button>
         </div>
     </div>
 
