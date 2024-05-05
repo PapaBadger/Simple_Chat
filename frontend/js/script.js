@@ -86,24 +86,34 @@ function escapeRegExp(text) {
 
 // Function to open settings popup
 function openSettings() {
-  document.getElementById('settings-popup').style.display = 'block';
+    document.getElementById('settings-popup').style.display = 'block';
 }
 
 // Function to close settings popup
 function closeSettings() {
-  document.getElementById('settings-popup').style.display = 'none';
+    document.getElementById('settings-popup').style.display = 'none';
 }
 
 // Function to save settings (nickname and chat color)
 function saveSettings() {
-  var newNickname = document.getElementById('new-nickname').value;
-  var chatColor = document.getElementById('chat-color').value;
-  
-  // Implement logic to save the new nickname and chat color
-  // For demonstration, just update the display with the new values
-  document.getElementById('username').textContent = newNickname;
-  document.getElementById('output').style.color = chatColor;
-  
-  // Close the settings popup
-  closeSettings();
+    var newNickname = document.getElementById('new-nickname').value;
+    var chatColor = document.getElementById('chat-color').value;
+    
+    // Implement logic to save the new nickname and chat color
+    // For demonstration, just update the display with the new values
+    document.getElementById('username').textContent = newNickname;
+    document.getElementById('output').style.color = chatColor;
+    
+    // Update the username in the database
+    insert_username(newNickname);
+    
+    // Display the name change message in the chatroom
+    var message = username + ' changed their name to ' + newNickname;
+    document.getElementById('output').innerHTML = message;
+    
+    // Log the name change message to the console
+    console.log(message);
+    
+    // Close the settings popup
+    closeSettings();
 }
