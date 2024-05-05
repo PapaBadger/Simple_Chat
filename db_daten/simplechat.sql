@@ -17,10 +17,15 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Datenbank: `simplechat`
---
+-- Datenbank: simplechat
+CREATE DATABASE IF NOT EXISTS simplechat;
+USE simplechat;
 
+-- Rechte für `Admin`@`localhost`
+GRANT USAGE ON *.* TO `Admin`@`localhost`;
+
+
+GRANT ALL PRIVILEGES ON `simplechat`.* TO `Admin`@`localhost`;
 -- --------------------------------------------------------
 
 --
