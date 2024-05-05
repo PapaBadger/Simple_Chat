@@ -7,13 +7,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //Variablen werden gesetzt
     $comment = $_POST['message'];
-    //$userid = $_POST['userid'];
+    $username = $_POST['username'];
 
     // SQL statement wird vorbereitet um Daten hinzuzufügen
-    $sql = "INSERT INTO messages (comment, userid) 
-            VALUES (?, ?)";
+    $sql = "INSERT INTO user (username) 
+            VALUES (?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("si", $comment);
+    $stmt->bind_param("s", $comment);
 
     // wird ausgeführt
     if ($stmt->execute()) {
