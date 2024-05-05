@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userid = $_POST['userid'];
 
     // SQL statement wird vorbereitet um Daten hinzuzufügen
-    $sql = "INSERT INTO comments (comment, userid) 
+    $sql = "INSERT INTO messages (comment, userid) 
             VALUES (?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("si", $comment, $userid);
