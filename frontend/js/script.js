@@ -105,3 +105,14 @@ function saveSettings() {
     // Close the settings popup
     closeSettings();
 }
+
+function sendMessage() {
+    var container = document.getElementById('chat-container');
+    var input = document.getElementById('message-input');
+    var newMessage = document.createElement('div');
+    newMessage.className = 'message';
+    newMessage.textContent = input.value;
+    container.appendChild(newMessage);
+    input.value = ''; // Clear input after sending
+    container.scrollTop = container.scrollHeight; // Scroll to the latest message
+}
