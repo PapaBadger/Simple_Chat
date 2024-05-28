@@ -1,0 +1,173 @@
+/* LIGHT THEME test */
+/* Default theme is assumed to be dark, so additional definitions are for the light theme */
+.light {
+    background-color: #FFFFFF;
+    color: #333333;
+}
+
+.light .chat-container,
+.light .tabs,
+.light .tab-content {
+    background-color: #FFFFFF;
+    color: #333333;
+}
+
+.light .messages {
+    color: #333333;
+}
+
+.light .nav-tabs .nav-link,
+.light .nav-tabs .nav-link.active {
+    color: #333333;
+    background-color: #E6E6E6;
+    border-color: #DDD;
+}
+
+.light .send-button,
+.light .send-button:hover {
+    background-color: #E6E6E6;
+    color: #333333;
+}
+
+.light .list-item {
+    border-bottom: 1px solid #CCC;
+}
+
+.light .settings-popup {
+    background-color: #E6E6E6;
+    color: #333333;
+}
+
+.light .settings-content button,
+.light .settings-content button:hover {
+    background-color: #DDD;
+    color: #333333;
+}
+
+/* RED THEME tst */
+/* General Red Theme styles */
+.red {
+    background-color: #d32f2f; /* Dark red background */
+    color: #ffffff; /* White text color for good contrast */
+}
+
+/* Red theme for chat-container */
+.red .chat-container {
+    background-color: #d32f2f;
+    color: #ffffff;
+}
+
+/* Red theme for messages */
+.red .messages {
+    color: #ffffff;
+}
+
+/* Red theme for Navbar and tabs */
+.red .navbar,
+.red .nav-tabs {
+    background-color: #b71c1c; /* Even darker red for head elements */
+}
+
+.red .nav-tabs .nav-link,
+.red .nav-tabs .nav-link.active {
+    background-color: #c62828; /* Slightly lighter red for distinct tab headers */
+    color: #ffffff;
+}
+
+.red .nav-tabs .nav-link:hover {
+    background-color: #e57373; /* Light red on hover */
+}
+
+/* Red theme send-button */
+.red .send-button,
+.red .send-button:hover {
+    background-color: #c62828; /* Consistent with tab headers */
+    color: #ffffff;
+}
+
+/* Red theme for user list items */
+.red .list-item {
+    border-bottom: 1px solid #b71c1c;
+}
+
+.red .list-item.current {
+    background-color: #c62828;
+}
+
+/* Settings popup within Red theme */
+.red .settings-popup {
+    background-color: #ef9a9a; /* Lighter red background for popup */
+    color: #b71c1c;
+}
+
+.red .settings-content button,
+.red .settings-content button:hover {
+    background-color: #b71c1c;
+    color: #ffffff;
+}
+
+/* SAKURA THEME */
+
+/* General Sakura Theme styles */
+.sakura {
+    background-color: #fff0f3; /* Soft pink background */
+    color: #333333; /* Dark text color for contrast */
+}
+
+/* Sakura theme for chat-container */
+.sakura .chat-container {
+    background-color: #ffe4e9; /* Slightly darker pink for chat area */
+    color: #333333;
+}
+
+/* Sakura theme for messages */
+.sakura .messages {
+    background-image: url('https://cdn.pixabay.com/photo/2016/08/26/19/02/sakura-1623565_1280.jpg'); /* Optional: Background image with subtle cherry blossom */
+    background-size: cover;
+    color: #333333;
+}
+
+/* Sakura theme for Navbar and tabs */
+.sakura .navbar,
+.sakura .nav-tabs {
+    background-color: #ffccd5; /* Cherry blossom pink for navigation */
+    color: #333333;
+}
+
+.sakura .nav-tabs .nav-link,
+.sakura .nav-tabs .nav-link.active {
+    background-color: #ffc0cb; /* Lighter pink for active tabs */
+    color: #333333;
+}
+
+.sakura .nav-tabs .nav-link:hover {
+    background-color: #ffb6c1; /* Slightly different pink on hover */
+}
+
+/* Sakura theme send-button */
+.sakura .send-button,
+.sakura .send-button:hover {
+    background-color: #ffc0cb; /* Consistent with tab headers */
+    color: #333333;
+}
+
+/* Sakura theme for user list items */
+.sakura .list-item {
+    border-bottom: 1px solid #ffccd5;
+}
+
+.sakura .list-item.current {
+    background-color: #ffc0cb;
+}
+
+/* Settings popup within Sakura theme */
+.sakura .settings-popup {
+    background-color: #ffccd5; /* Soft pink background for popup */
+    color: #333333;
+}
+
+.sakura .settings-content button,
+.sakura .settings-content button:hover {
+    background-color: #ffb6c1;
+    color: #333333;
+}

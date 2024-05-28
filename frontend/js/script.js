@@ -18,23 +18,36 @@ function init() {
     insert_username(username);
     document.getElementById('username').innerText = username;
     console.log('Username:', username);
+
     document.getElementById('send-button').addEventListener('click', replaceEmojis);
     document.getElementById("message").addEventListener("keydown", function(event) {
-        if (event.key === "Enter" && !event.shiftKey) { // Enter key without Shift
-            event.preventDefault(); // Prevent the default action of Enter key
-            document.getElementById("send-button").click(); // Trigger the click event of the send button
+        if (event.key === "Enter" && !event.shiftHit) {
+            event.preventDefault();
+            document.getElementById("send-button").click();
         }
     });
-    // Add event listener for changing theme
-    document.getElementById('username').style.color = nameColor; // Set the color of the username
+
+    document.getElementById('username').style.color = nameColor;
     document.getElementById('theme-selector').addEventListener('change', changeTheme);
+
+    // Apply saved theme if available
+    let savedTheme = sessionStorage.getItem('theme') || 'dark'; // default to 'dark' if no saved theme
+    document.getElementById('theme-finder').value = savedTheme; // Set the dropdown to show the current theme
+    changeForPersistedTheme(savedTheme); // Apply the theme
 }
 
+document.addEventListener('DOMContentLoaded', init);
+
 // Function to change theme
+function changeForPersistedTheme(theme) {
+    document.body.classList.remove('light', 'dark', 'red', 'sakura', 'blue'); // Clean all theme classes
+    document.body.classList.add(theme); // Set selected theme class
+    sessionStorage.setItem('theme', theme); // Optionally save theme to session
+}
+
 function changeTheme() {
-    let selectedTheme = document.getElementById('theme-selector').value;
-    // Implement logic to change theme based on selectedTheme
-    document.body.style.backgroundColor = selectedTheme;
+    let theme = document.getElementById('theme-selector').value;
+    changeForPersistedTheme(theme);
 }
 
 document.addEventListener('DOMContentLoaded', init);
