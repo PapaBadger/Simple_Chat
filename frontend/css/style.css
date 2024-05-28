@@ -171,19 +171,3 @@ body {
 .settings-content button:hover {
     background-color: #464c8d;
 }
-
-/* Chatbox - messages */
-/* .chat-container {
-    width: 300px;
-    height: 400px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    overflow-y: auto; /* enables scrolling 
-}*/
-
-/* .message {
-    margin: 5px;
-    padding: 8px;
-    background-color: #f0f0f0;
-    border-radius: 4px;
-} */
