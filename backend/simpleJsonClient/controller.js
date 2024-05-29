@@ -1,75 +1,62 @@
 $(document).ready(function () {
     var conn = new WebSocket('ws://localhost:8080');
+    //var conn = new WebSocket('ws://192.168.56.1:8080');
     
     // Funktion zum Senden einer Nachricht
     function sendMessage() {
-        var text = $('#message').val(); // Replace 'your-input-field-id' with the actual ID of your input field
-        conn.send(JSON.stringify({
-            type: 'message',
-            text: text,
-            username: username
-        }));
-
-    console.log("Message: " + message); 
+        var text = $('#message').val();
+        var username = $('#username').text();
     
-
-    // Send the text to your server
-    var message = {
-        type: 'chat',
-        username: username,
-        text: text
-    };
-        var userid = sessionStorage.getItem('userid');
+        if (text !== '') {
+            var message = {
+                type: 'chat',
+                username: username,
+                text: text
+            };
     
-        // Senden Sie die Nachricht an Ihren Server
-        $.ajax({
-            url: '../backend/businesslogic/db/insertMessage.php',
-            type: 'POST',
-            data: {
-                message: message, // Nachricht als 'message' an das Skript senden
-            },
-            success: function(response) {
-                console.log("Message saved successfully: " + response);
-            },
-            error: function(error) {
-                console.log("Error saving message: ", error);
-            }
-        });
+            // Send the message to your server with AJAX
+            $.ajax({
+                url: '../backend/businesslogic/db/insertMessage.php',
+                type: 'POST',
+                data: {
+                   // message: message, // Send the message as 'message' to the script
+                },
+                // ...
+            });
     
-        // Send the text to your server
-        conn.send(JSON.stringify(message));
+            // Send the message to your server with WebSocket
+            conn.send(JSON.stringify(message));
     
-        $("#message").val(""); // Eingabefeld leeren, nachdem die Nachricht gesendet wurde
+            // Append the message to the chat window
+            var sanitizedUsername = $("<div>").text(username).html();
+            var sanitizedText = $("<div>").text(text).html();
+            $('#messages').append('<p><strong>' + sanitizedUsername + ':</strong> ' + sanitizedText + '</p>');
+    
+            $('#message').val(''); // Clear input after sending
+        }
     }
-
-    // Event-Handler für den Klick auf den Senden-Button
-    $("#send-button").click(function() {
-        sendMessage(); // Nachricht senden, wenn der Button geklickt wird
-    });
-
-    // Event-Handler für die WebSocket-Verbindung
-    conn.onopen = function(e) {
-        console.log("Connection established!", e);
-    };
-
-
+    
     conn.onmessage = function(e) {
         console.log('Server: ' + e.data);
         try {
-            var startIndex = e.data.indexOf('{');
-            var jsonString = e.data.slice(startIndex);
-            console.log('Extracted JSON string:', jsonString);
-            var message = JSON.parse(jsonString);
-            if (message.type === 'chat') {
-                $('#messages').append('<p><strong>' + message.username + ':</strong> ' + message.text + '</p>');
-            } else if (message.type === 'notification') {
-                $('#messages').append('<p class="notification">' + message.text + '</p>');
+            var message = JSON.parse(e.data);
+            var currentUsername = $('#username').text();
+    
+            // Only append the message if it's not from the current user
+            if (message.username !== currentUsername) {
+                if (message.type === 'chat') {
+                    var sanitizedUsername = $("<div>").text(message.username).html();
+                    var sanitizedText = $("<div>").text(message.text).html();
+                    $('#messages').append('<p><strong>' + sanitizedUsername + ':</strong> ' + sanitizedText + '</p>');
+                } else if (message.type === 'notification') {
+                    var sanitizedText = $("<div>").text(message.text).html();
+                    $('#messages').append('<p class="notification">' + sanitizedText + '</p>');
+                }
             }
         } catch (error) {
             console.log("Error parsing message: ", error);
         }
-    
-};
+    };
 
     
 });

@@ -61,7 +61,7 @@
             <div class="messages">
                 <!-- Messages will be displayed here -->
                 <!-- test for outputs -->
-                <!-- <div id="output" contenteditable="true">Output will appear here...</div> -->
+                <div id="output" contenteditable="true"></div>
             </div>
         </div>
         <div class="tabs">
@@ -75,13 +75,8 @@
                     <ul class="list-group" id="users">
                         <li class="list-item current">
                             <span id="username"></span>
-                            <!-- Assuming this gets filled with current user's name by JS -->
+                            <!-- This gets filled with connected usernames by JS -->
                         </li>
-                        <li class="list-item">pu$$ydestroyer69</li>
-                        <li class="list-item">JohnDoe123</li>
-                        <li class="list-item">JaneSmith456</li>
-                        <li class="list-item">EmilyBrown123</li>
-                        <li class="list-item">cmblaster666</li>
                     </ul>
                 </div>
             </div>
@@ -90,10 +85,10 @@
 
     <div class="container bg-dark">
         <div class="input-container">
-            <!-- <textarea class="input-field" id="message" rows="1" placeholder="Type your message..."></textarea>
-            <button class="btn send-button" id="send-button">Send</button> -->
-            <input type="text" id="message-input" placeholder="Type your message...">
-            <button onclick="sendMessage()">Send</button>
+            <textarea class="input-field" id="message" rows="1" placeholder="Type your message..."></textarea>
+            <button class="btn send-button" id="send-button">Send</button> 
+            <!-- <input type="text" id="message-input" placeholder="Type your message..."> -->
+            <!--<button onclick="sendMessage()">Send</button>-->
         </div>
     </div>
 

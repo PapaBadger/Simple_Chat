@@ -24,6 +24,7 @@ function init() {
         if (event.key === "Enter" && !event.shiftHit) {
             event.preventDefault();
             document.getElementById("send-button").click();
+            sendMessage();
         }
     });
 
@@ -36,7 +37,7 @@ function init() {
     changeForPersistedTheme(savedTheme); // Apply the theme
 }
 
-document.addEventListener('DOMContentLoaded', init);
+//document.addEventListener('DOMContentLoaded', init);
 
 // Function to change theme
 function changeForPersistedTheme(theme) {
@@ -68,11 +69,15 @@ function replaceEmojis() {
     };
 
     let inputText = document.getElementById('message').value;
+    let username = document.getElementById('username').textContent;
+
+   
     for (let text in emojiMap) {
         let regex = new RegExp(escapeRegExp(text), 'g');
         inputText = inputText.replace(regex, emojiMap[text]);
     }
-    document.getElementById('output').innerHTML = inputText;
+
+    document.getElementById('output').innerHTML += '<p>' + username + ': ' + inputText + '</p>';
 }
 
 function escapeRegExp(text) {

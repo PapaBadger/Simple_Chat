@@ -12,13 +12,13 @@ class Chat implements MessageComponentInterface {
 
     public function onOpen(ConnectionInterface $conn) {
     $this->clients->attach($conn);
-    echo "New connection! ({$conn->resourceId})\n";
-}
+    echo "New connection! ({$conn->remoteAddress})\n";
+    }
 
     public function onMessage(ConnectionInterface $from, $msg) {
         $messageData = json_decode($msg);
-        if ($messageData === null) {
-            // The message is not a valid JSON string.
+        if (!isset($messageData->username) || !isset($messageData->text)) {
+            // The messageData object doesn't have a username or text property.
             return;
         }
         $username = $messageData->username;
@@ -29,16 +29,11 @@ class Chat implements MessageComponentInterface {
                 $client->send(json_encode([
                     'type' => 'chat',
                     'username' => $username,
-                    'text' => $responseText
+                    'text' => $text
                 ]));
             }
         }
-        //echo "New message: {$responseText}\n";
-        // $from->send(json_encode([
-        //     'type' => 'chat',
-        //     'username' => $username,
-        //     'text' => $responseText
-        // ]));
+        echo "{$responseText}\n";
     }
 
     public function onClose(ConnectionInterface $conn) {
