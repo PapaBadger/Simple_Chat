@@ -1,4 +1,1 @@
-@echo off
-cd /d C:\xampp\htdocs\Simple_Chat\backend
-php businesslogic\websocketServer.php
-pause
+Start-Process -FilePath "C:\xampp\xampp_shell.bat" -ArgumentList "/C cd /d C:\xampp\htdocs\Simple_Chat\backend && php businesslogic/websocketServer.php"

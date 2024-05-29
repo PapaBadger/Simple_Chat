@@ -11,22 +11,27 @@ function askUsername() {
         }
     }
     sessionStorage.setItem('username', username);
+    return username;
 }
 
 function init() {
-    askUsername();
+    username = askUsername();
     insert_username(username);
     document.getElementById('username').innerText = username;
     console.log('Username:', username);
 
-    document.getElementById('send-button').addEventListener('click', replaceEmojis);
-    document.getElementById("message").addEventListener("keydown", function(event) {
-        if (event.key === "Enter" && !event.shiftHit) {
-            event.preventDefault();
-            document.getElementById("send-button").click();
-            sendMessage();
-        }
+    document.getElementById('send-button').addEventListener('click', function() {
+        replaceEmojis();
+        sendMessageToServer();
     });
+
+    document.getElementById("message").addEventListener("keydown", function(event) {
+    if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        replaceEmojis();
+        sendMessageToServer();
+    }
+});
 
     document.getElementById('username').style.color = nameColor;
     document.getElementById('theme-selector').addEventListener('change', changeTheme);
@@ -37,7 +42,7 @@ function init() {
     changeForPersistedTheme(savedTheme); // Apply the theme
 }
 
-//document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', init);
 
 // Function to change theme
 function changeForPersistedTheme(theme) {
@@ -50,8 +55,6 @@ function changeTheme() {
     let theme = document.getElementById('theme-selector').value;
     changeForPersistedTheme(theme);
 }
-
-document.addEventListener('DOMContentLoaded', init);
 
 function insert_username(username) {
     // Your AJAX call to insert username into database
@@ -78,6 +81,8 @@ function replaceEmojis() {
     }
 
     document.getElementById('output').innerHTML += '<p>' + username + ': ' + inputText + '</p>';
+    sendMessageToServer();
+    document.getElementById('message').value = '';
 }
 
 function escapeRegExp(text) {
@@ -96,7 +101,7 @@ function closeSettings() {
 
 // Function to save settings (nickname and username color)
 function saveSettings() {
-    var newNickname = document.getElementById('new-nickname').value;
+    var newNickname = newNickname;
     var nameColor = document.getElementById('chat-color').value;
     
     // Implement logic to save the new nickname and chat color
@@ -123,6 +128,14 @@ function saveSettings() {
     // Close the settings popup
     closeSettings();
 }
+
+// Call sendMessageToServer when the Enter key is pressed in the message input field
+$('#message').keypress(function(e) {
+    if (e.which == 13) { // 13 is the ASCII code for the Enter key
+        e.preventDefault(); // Prevent the default action (submitting the form)
+        sendMessageToServer();
+    }
+});
 
 function sendMessage() {
     var container = document.getElementById('chat-container');
