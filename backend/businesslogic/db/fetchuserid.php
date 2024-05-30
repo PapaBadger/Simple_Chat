@@ -20,12 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $row = $result->fetch_assoc();
             $userid = $row['userid'];
             $_SESSION['userid'] = $userid;
+            //echo "User ID: " . $userid; // Debugging: Ausgabe der Benutzer-ID
             // Speichern der userid in der Variable $userid
         } else {
             echo "No user found with username: " . $username;
         }
     } else {
-        echo "Error executing query: " . $conn->error;
+        echo "Error executing query: " . $stmt->error; // Debugging: Ausgabe von SQL-Fehlern
     }
 
     // Connection schließen
@@ -39,4 +40,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     echo "Error: Invalid request method";
 }
+
 ?>

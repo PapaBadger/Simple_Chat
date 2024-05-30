@@ -5,10 +5,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include 'dbConnect.php';
 
     // Überprüfen, ob der Benutzer angemeldet ist
-    
         // Variablen setzen
         $message = $_POST['message'];
-        $userid = $_SESSION['userid'];// Benutzer-ID aus der Session holen
+        $userid = $_SESSION['userid']; // Benutzer-ID aus der Session holen
 
         // SQL-Statement vorbereiten
         $sql = "INSERT INTO messages (message, userid) VALUES (?, ?)";
@@ -27,5 +26,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->close();
 }
 ?>
-
-

@@ -11,8 +11,8 @@ if (!isset($conn) || !($conn instanceof mysqli)) {
 
     // Check connection
     if ($conn->connect_error) {
-        error_log("Connection failed: " . $conn->connect_error);
-        exit("An error occurred while connecting to the database.");
+        error_log("Connection failed: " . $conn->connect_error); // Log the error to the server logs
+        exit("An error occurred while connecting to the database."); // Output a generic error message
     }
 
     // Set character set to utf8mb4
@@ -21,14 +21,4 @@ if (!isset($conn) || !($conn instanceof mysqli)) {
         exit("An error occurred while setting the character set.");
     }
 }
-
-// Use this function to run SQL queries
-function query($sql, $types = "", $params = []) {
-    global $conn;
-    $stmt = $conn->prepare($sql);
-    if ($types && $params) {
-        $stmt->bind_param($types, ...$params);
-    }
-    $stmt->execute();
-    return $stmt->get_result();
-}
+?>

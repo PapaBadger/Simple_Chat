@@ -1,7 +1,7 @@
 //yoinked from memory game assignment and modified
 let username = sessionStorage.getItem('username'); // Retrieve username from session storage
 let nameColor = sessionStorage.getItem('nameColor'); // Retrieve chat color from session storage
-
+let userid = sessionStorage.getItem('userid');
 
 function askUsername() {
     while (!username || username.trim() === '') {
@@ -81,6 +81,62 @@ function replaceEmojis() {
     }
 
     document.getElementById('output').innerHTML += '<p>' + username + ': ' + inputText + '</p>';
+
+/////////////////////////////////////////AJAX CALLS FOR DB (START)/////////////////////////////////////////
+
+// AJAX-Aufruf, um den Benutzernamen einzufügen
+$.ajax({
+    url: '../backend/businesslogic/db/insertUser.php',
+    type: 'POST',
+    data: {
+        username: username
+    },
+    success: function(response) {
+        console.log('User Data:', response); // Anzeigen der Benutzer-ID in der Konsole
+        // Fügen Sie hier ggf. weitere Aktionen hinzu
+    },
+    error: function(xhr, status, error) {
+        console.error('Error inserting user:', error);
+    }
+});
+// AJAX-Aufruf, um die Userid zubekommen / zum Debuggen
+$.ajax({
+    url: '../backend/businesslogic/db/fetchuserid.php',
+    type: 'POST',
+    data: {
+        username: username,
+        userid: userid
+    },
+    success: function(response) {
+        console.log('User ID:', response); // Anzeigen der Benutzer-ID in der Konsole
+        // Fügen Sie hier ggf. weitere Aktionen hinzu
+    },
+    error: function(xhr, status, error) {
+        console.error('Error inserting user:', error);
+    }
+});
+
+// AJAX-Aufruf, um die Nachricht einzufügen
+$.ajax({
+    url: '../backend/businesslogic/db/insertMessage.php',
+    type: 'POST',
+    data: {
+        message: inputText,
+        username: username
+    },
+    success: function(response) {
+        console.log('Message sent successfully:', response);
+        // Hier können Sie weitere Aktionen ausführen, wenn die Nachricht erfolgreich eingefügt wurde
+    },
+    error: function(xhr, status, error) {
+        console.error('Error sending message:', error);
+    }
+});
+
+/////////////////////////////////////////AJAX CALLS FOR DB (END)/////////////////////////////////////////
+
+
+    
     sendMessageToServer();
     document.getElementById('message').value = '';
 }
