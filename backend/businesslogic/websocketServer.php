@@ -14,4 +14,8 @@ $server = IoServer::factory(
     8080
 );
 
+echo "\nServer started on port 8080\n\n";
+echo "Server running...\n\n";
+echo "Listening for clients...\n\n";
+
 $server->run();
