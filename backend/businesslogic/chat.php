@@ -2,16 +2,19 @@
 namespace MyApp;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
+use React\EventLoop\LoopInterface;
 
 class Chat implements MessageComponentInterface {
     private $clients;
     private $users;
     private $userLookup;
+    private $loop;
 
-    public function __construct() {
+    public function __construct(LoopInterface $loop) {
         $this->clients = new \SplObjectStorage;
         $this->users = [];
         $this->userLookup = [];
+        $this->loop = $loop;
     }
 
     public function onOpen(ConnectionInterface $conn) {
