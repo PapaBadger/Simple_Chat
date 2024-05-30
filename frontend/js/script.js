@@ -16,9 +16,29 @@ function askUsername() {
 
 function init() {
     username = askUsername();
-    insert_username(username);
     document.getElementById('username').innerText = username;
     console.log('Username:', username);
+
+/////////////////////////////////////////AJAX CALLS FOR DB (START)/////////////////////////////////////////
+
+// AJAX-Aufruf, um den Benutzernamen einzufügen
+$.ajax({
+    url: '../backend/businesslogic/db/insertUser.php',
+    type: 'POST',
+    data: {
+        username: username
+    },
+    success: function(response) {
+        console.log('User Data:', response); // Anzeigen der Benutzer-ID in der Konsole
+        // Fügen Sie hier ggf. weitere Aktionen hinzu
+    },
+    error: function(xhr, status, error) {
+        console.error('Error inserting user:', error);
+    }
+});
+
+
+/////////////////////////////////////////AJAX CALLS FOR DB (END)/////////////////////////////////////////
 
     document.getElementById('send-button').addEventListener('click', function() {
         replaceEmojis();
@@ -40,6 +60,7 @@ function init() {
     let savedTheme = sessionStorage.getItem('theme') || 'dark'; // default to 'dark' if no saved theme
     document.getElementById('theme-finder').value = savedTheme; // Set the dropdown to show the current theme
     changeForPersistedTheme(savedTheme); // Apply the theme
+
 }
 
 document.addEventListener('DOMContentLoaded', init);
@@ -54,10 +75,6 @@ function changeForPersistedTheme(theme) {
 function changeTheme() {
     let theme = document.getElementById('theme-selector').value;
     changeForPersistedTheme(theme);
-}
-
-function insert_username(username) {
-    // Your AJAX call to insert username into database
 }
 
 // -------------- Emoji Replacement
@@ -84,22 +101,7 @@ function replaceEmojis() {
 
 /////////////////////////////////////////AJAX CALLS FOR DB (START)/////////////////////////////////////////
 
-// AJAX-Aufruf, um den Benutzernamen einzufügen
-$.ajax({
-    url: '../backend/businesslogic/db/insertUser.php',
-    type: 'POST',
-    data: {
-        username: username
-    },
-    success: function(response) {
-        console.log('User Data:', response); // Anzeigen der Benutzer-ID in der Konsole
-        // Fügen Sie hier ggf. weitere Aktionen hinzu
-    },
-    error: function(xhr, status, error) {
-        console.error('Error inserting user:', error);
-    }
-});
-// AJAX-Aufruf, um die Userid zubekommen / zum Debuggen
+    // AJAX-Aufruf, um die Userid zubekommen / zum Debuggen
 $.ajax({
     url: '../backend/businesslogic/db/fetchuserid.php',
     type: 'POST',
@@ -134,8 +136,6 @@ $.ajax({
 });
 
 /////////////////////////////////////////AJAX CALLS FOR DB (END)/////////////////////////////////////////
-
-
     
     sendMessageToServer();
     document.getElementById('message').value = '';
