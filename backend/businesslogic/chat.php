@@ -36,13 +36,16 @@ class Chat implements MessageComponentInterface {
     
         if ($messageData->type === 'newUser') {
             $username = $messageData->username;
-    
+            echo "New user: $username\n"; // Debug line
+        
             // Check if the user is already in the user list
             if (!in_array($username, $this->users)) {
                 // Add the user to the user list
                 $this->users[] = $username;
+                // Add the user to the userLookup array
+                $this->userLookup[$from->resourceId] = $username;
             }
-    
+        
             // Send the updated user list to all clients
             foreach ($this->clients as $client) {
                 $client->send(json_encode([
@@ -63,11 +66,27 @@ class Chat implements MessageComponentInterface {
                     ]));
                 }
             }
+        }elseif ($messageData->type === 'whisper') {
+            $username = $messageData->username;
+            $text = $messageData->text;
+            $target = $messageData->target; // The target user
+        
+            // Find the connection for the target user
+            foreach ($this->clients as $client) {
+                if (isset($this->userLookup[$client->resourceId]) && $this->userLookup[$client->resourceId] === $target) {
+                    // Send the message only to the target user
+                    $client->send(json_encode([
+                        'type' => 'whisper',
+                        'username' => $username,
+                        'text' => $text,
+                        'target' => $target
+                    ]));
+                    break;
+                }
+            }
         }
     }
 
-    
-  
     public function onClose(ConnectionInterface $conn) {
         $this->clients->detach($conn);
         echo "Connection {$conn->resourceId} has disconnected\n";
@@ -95,8 +114,6 @@ class Chat implements MessageComponentInterface {
             ]));
         }
     }
-
-
 
     public function onError(ConnectionInterface $conn, \Exception $e) {
         echo "An error has occurred: {$e->getMessage()}\n";

@@ -4,33 +4,40 @@ $(document).ready(function () {
 
     conn.onopen = function(e) {
         console.log('Connection established!');
-    
-        // Send a 'newUser' message when the connection is established
-        var username = $('#username').val();
+        var username = $('#username').text();
+        console.log('Username: ', username); // Add this line
+
+        // Send a 'newUser' message right after the connection is established
         conn.send(JSON.stringify({
             type: 'newUser',
             username: username
         }));
     };
-    //$('#username').val('DefaultUsername').change();
 
-    // Funktion zum Senden einer Nachricht
+    // Message sending function
     window.sendMessageToServer=function() {
         var text = $('#message').val();
         var username = $('#username').text();
         
-        console.log('Username: ', username); // Add this line
-        console.log('Text: ', text); // Add this line
-
         if (text !== '') {
+            var type = 'chat';
+            var target = null;
+    
+            // Check if the message starts with "@username"
+            var match = text.match(/^@(\w+)\s(.*)/);
+            if (match) {
+                type = 'whisper';
+                target = match[1]; // The mentioned username
+                text = match[2]; // The rest of the message
+            }
+    
             var message = {
-                type: 'chat',
+                type: type,
                 username: username,
-                text: text
+                text: text,
+                target: target // The target user for 'whisper' messages
             };
-            
-            console.log('Message: ', message); // Add this line
-
+    
             // Send the message to your server with WebSocket
             if (conn.readyState === WebSocket.OPEN) {
                 conn.send(JSON.stringify(message));
@@ -43,16 +50,14 @@ $(document).ready(function () {
             var sanitizedText = $("<div>").text(text).html();
             $('#messages').append('<p><strong>' + sanitizedUsername + ':</strong> ' + sanitizedText + '</p>');
     
-            $('#message').val(''); // Clear input after sending
+            $('#message').val(''); 
         }
     }
 
-    // Call sendMessageToServer when the Send button is clicked
     $('#send-button').click(function() {
         sendMessageToServer();
     });
 
-    // Call sendMessageToServer when the Enter key is pressed in the message input field
     $('#message').keypress(function(e) {
         if (e.which == 13) { // 13 is the ASCII code for the Enter key
             e.preventDefault(); // Prevent the default action (submitting the form)
@@ -60,7 +65,6 @@ $(document).ready(function () {
         }
     });
 
-    // Client side code
     $('#username').change(function() {
         var username = $(this).val();
         console.log('Setting username to', username);
@@ -83,6 +87,7 @@ $(document).ready(function () {
         console.log('Server: ' + e.data);
         try {
             var message = JSON.parse(e.data);
+            console.log('Parsed message: ', message);
     
             if (message.type === 'userList') {
                 message.users.forEach(function(user) {
@@ -99,11 +104,21 @@ $(document).ready(function () {
                 if (sanitizedUsername !== currentUsername) {
                     $('#output').append('<p><strong>' + sanitizedUsername + ':</strong> ' + sanitizedText + '</p>');
                 }
+            }else if (message.type === 'whisper') {
+                var sanitizedUsername = $("<div>").text(message.username).html();
+                var sanitizedText = $("<div>").text(message.text).html();
+                var sanitizedTarget = $("<div>").text(message.target).html();
+            
+                // Retrieve the current username within the function
+                var currentUsername = $('#username').text();
+                console.log('Received whisper from', sanitizedUsername, 'to', sanitizedTarget, 'current username is', currentUsername);
+            
+                if (sanitizedTarget === currentUsername) {
+                    $('#output').append('<p><strong>' + sanitizedUsername + ' (whisper):</strong> ' + sanitizedText + '</p>');
+                }
             }
         } catch (error) {
             console.log("Error parsing message: ", error);
         }
-    };
-
-  
+    };  
 });
