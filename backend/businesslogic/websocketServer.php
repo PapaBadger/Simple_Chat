@@ -4,11 +4,14 @@ use Ratchet\Server\IoServer;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
 use MyApp\Chat;
+use React\EventLoop\Factory;
+
+$loop = Factory::create();
 
 $server = IoServer::factory(
     new HttpServer(
         new WsServer(
-            new Chat()
+            new Chat($loop)
         )
     ),
     8080
