@@ -120,7 +120,7 @@ function replaceEmojis() {
         inputText = inputText.replace(regex, emojiMap[text]);
     }
 
-    document.getElementById('output').innerHTML += '<p>' + username + ': ' + inputText + '</p>';
+    document.getElementById('output').innerHTML += '<p> <span style="color:' + nameColor + '">' + username + '</span>: ' + inputText + '</p>';
 
     // AJAX CALLS FOR DB (START)
     $.ajax({
@@ -137,27 +137,11 @@ function replaceEmojis() {
             console.error('Error inserting user:', error);
         }
     });
-
-    $.ajax({
-        url: '../backend/businesslogic/db/insertMessage.php',
-        type: 'POST',
-        data: {
-            message: inputText,
-            username: username
-        },
-        success: function(response) {
-            console.log('Message sent successfully:', response);
-        },
-        error: function(xhr, status, error) {
-            console.error('Error sending message:', error);
-        }
-    });
     // AJAX CALLS FOR DB (END)
 
     sendMessageToServer();
     document.getElementById('message').value = '';
 }
-
 
 function escapeRegExp(string) {
     return string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
@@ -199,6 +183,8 @@ function saveSettings() {
                 console.error('Error updating username:', error);
             }
         });
+        sendUpdateMessage(`${username} changed their username to ${newNickname}`);
+        console.log(`${username} changed their username to ${newNickname}`);
     }
 
     if (newNameColor && newNameColor !== nameColor) {
@@ -208,7 +194,8 @@ function saveSettings() {
         nameColor = newNameColor;
 
         // Display the color change message in the chatroom
-        document.getElementById('output').innerHTML += `<p>${username} changed their name color to ${newNameColor}</p>`;
+        
+        sendUpdateMessage(`${username} changed their name color to ${newNameColor}`);
         console.log(`${username} changed their name color to ${newNameColor}`);
     }
 
@@ -220,7 +207,7 @@ function saveSettings() {
     }
 
     // Close the settings popup
-    closeSettings();
+    closeSettings();   
 }
 
 // Call sendMessageToServer when the Enter key is pressed in the message input field
@@ -232,13 +219,55 @@ $('#message').keypress(function(e) {
 });
 
 function sendMessageToServer() {
-    // Your code to send the message to the server
-    // Ensure you clear the input field after sending the message
     let messageField = document.getElementById('message');
     let message = messageField.value.trim();
 
     if (message) {
-        document.getElementById('output').innerHTML += '<p>' + username + ': ' + message + '</p>';
+        document.getElementById('output').innerHTML += '<p><span style="color:' + nameColor + '">' + username + '</span>: ' + message + '</p>';
         messageField.value = ''; // Clear the input field
+
+        // AJAX CALLS FOR DB (START)
+        $.ajax({
+            url: '../backend/businesslogic/db/insertMessage.php',
+            type: 'POST',
+            data: {
+                message: message,
+                username: username,
+                userid: userid
+            },
+            success: function(response) {
+                console.log('Message sent successfully:', response);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error sending message:', error);
+            }
+        });
+        // AJAX CALLS FOR DB (END)
     }
+}
+
+function sendUpdateMessage(update) {
+    document.getElementById('output').innerHTML += '<p style="color:' + nameColor + '">' + update + '</p>';
+
+    // AJAX CALLS FOR DB (START)
+    $.ajax({
+        url: '../backend/businesslogic/db/insertMessage.php',
+        type: 'POST',
+        data: {
+            message: update,
+            username: username,
+            userid: userid
+        },
+        success: function(response) {
+            console.log('Update message sent successfully:', response);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error sending update message:', error);
+        }
+    });
+    // AJAX CALLS FOR DB (END)
+}
+
+function displayUpdateMessage(update) {
+    document.getElementById('output').innerHTML += '<p style="color:' + nameColor + '">' + update + '</p>';
 }
