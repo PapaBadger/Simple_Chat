@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 31. Mai 2024 um 09:44
+-- Erstellungszeit: 05. Mai 2024 um 12:45
 -- Server-Version: 10.4.28-MariaDB
 -- PHP-Version: 8.2.4
 
@@ -11,18 +11,21 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-CREATE DATABASE IF NOT EXISTS `simplechat`;
-USE `simplechat`;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Datenbank: `simplechat`
---
+-- Datenbank: simplechat
+CREATE DATABASE IF NOT EXISTS simplechat;
+USE simplechat;
 
+-- Rechte für `Admin`@`localhost`
+GRANT USAGE ON *.* TO `Admin`@`localhost`;
+
+
+GRANT ALL PRIVILEGES ON `simplechat`.* TO `Admin`@`localhost`;
 -- --------------------------------------------------------
 
 --
@@ -41,13 +44,7 @@ CREATE TABLE `messages` (
 INSERT INTO `messages` (`message`, `userid`) VALUES
 ('Test', 1),
 ('Test', 1),
-('asdf', 2),
-('dfghdfhdhf', 1),
-('sdfghsdf', 1),
-('Hello', 120),
-('Test12', 120),
-('Hello?', 121),
-('yo whats up', 120);
+('asdf', 2);
 
 -- --------------------------------------------------------
 
@@ -66,10 +63,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`username`, `userid`) VALUES
 ('User1', 1),
-('User2', 2),
-('TestUser1', 119),
-('TestUser2', 120),
-('TestUser3', 121);
+('User2', 2);
 
 --
 -- Indizes der exportierten Tabellen
@@ -95,7 +89,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT für Tabelle `user`
 --
 ALTER TABLE `user`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints der exportierten Tabellen
