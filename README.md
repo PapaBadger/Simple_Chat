@@ -7,6 +7,9 @@ Installed composer into our project to allow us to host the server.
 To start the server you need to open xampp shell, move to this directory: 
 cd htdocs\Simple_Chat\backend && php businesslogic/websocketServer.php
 
+mina: cd htdocs\SEM2\SIMPLE CHAT\Simple_Chat\backend && php businesslogic/websocketServer.php
+
+
 and the server should start!
 
 21.03.24 : 11:39

@@ -46,10 +46,12 @@ body {
 }
 
 .input-container {
-    width: 100%;
+    width:100%;
+    height: auto;
+    align-self: flex-start;
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
 }
 
 .input-field {
