@@ -1,4 +1,3 @@
-//yoinked from memory game assignment and modified
 let username = sessionStorage.getItem('username'); // Retrieve username from session storage
 let nameColor = sessionStorage.getItem('nameColor'); // Retrieve chat color from session storage
 let userid = sessionStorage.getItem('userid');
@@ -19,26 +18,21 @@ function init() {
     document.getElementById('username').innerText = username;
     console.log('Username:', username);
 
-/////////////////////////////////////////AJAX CALLS FOR DB (START)/////////////////////////////////////////
-
-// AJAX-Aufruf, um den Benutzernamen einzufügen
-$.ajax({
-    url: '../backend/businesslogic/db/insertUser.php',
-    type: 'POST',
-    data: {
-        username: username
-    },
-    success: function(response) {
-        console.log('User Data:', response); // Anzeigen der Benutzer-ID in der Konsole
-        // Fügen Sie hier ggf. weitere Aktionen hinzu
-    },
-    error: function(xhr, status, error) {
-        console.error('Error inserting user:', error);
-    }
-});
-
-
-/////////////////////////////////////////AJAX CALLS FOR DB (END)/////////////////////////////////////////
+    // AJAX CALLS FOR DB (START)
+    $.ajax({
+        url: '../backend/businesslogic/db/insertUser.php',
+        type: 'POST',
+        data: {
+            username: username
+        },
+        success: function(response) {
+            console.log('User Data:', response); // Anzeigen der Benutzer-ID in der Konsole
+        },
+        error: function(xhr, status, error) {
+            console.error('Error inserting user:', error);
+        }
+    });
+    // AJAX CALLS FOR DB (END)
 
     document.getElementById('send-button').addEventListener('click', function() {
         replaceEmojis();
@@ -46,21 +40,20 @@ $.ajax({
     });
 
     document.getElementById("message").addEventListener("keydown", function(event) {
-    if (event.key === "Enter" && !event.shiftKey) {
-        event.preventDefault();
-        replaceEmojis();
-        sendMessageToServer();
-    }
-});
+        if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault();
+            replaceEmojis();
+            sendMessageToServer();
+        }
+    });
 
     document.getElementById('username').style.color = nameColor;
     document.getElementById('theme-selector').addEventListener('change', changeTheme);
 
     // Apply saved theme if available
     let savedTheme = sessionStorage.getItem('theme') || 'dark'; // default to 'dark' if no saved theme
-    document.getElementById('theme-finder').value = savedTheme; // Set the dropdown to show the current theme
+    document.getElementById('theme-selector').value = savedTheme; // Set the dropdown to show the current theme
     changeForPersistedTheme(savedTheme); // Apply the theme
-
 }
 
 document.addEventListener('DOMContentLoaded', init);
@@ -85,13 +78,33 @@ function replaceEmojis() {
         'XD': '😆',
         ':(': '😢',
         ':P': '😜',
-        ';)': '😉'
+        ';)': '😉',
+        ':D': '😄',
+        'B)': '😎',
+        ':O': '😲',
+        ';*': '😘',
+        '<3': '❤️',
+        ':|': '😐',
+        ':/': '😕',
+        ':*': '😗',
+        'O:)': '😇',
+        ':poop:': '💩',
+        ':fire:': '🔥',
+        ':100:': '💯',
+        ':clap:': '👏',
+        ':pray:': '🙏',
+        ':heart-eyes:': '😍',
+        ':handshake:': '🤝',
+        ':gay-pride:': '🏳️‍🌈',
+        ':thumbs-up': '👍',
+        ':thumbs-down': '👎',
+        ':nails': '💅',
+        ':muscle': '💪'
     };
 
     let inputText = document.getElementById('message').value;
     let username = document.getElementById('username').textContent;
 
-   
     for (let text in emojiMap) {
         let regex = new RegExp(escapeRegExp(text), 'g');
         inputText = inputText.replace(regex, emojiMap[text]);
@@ -99,44 +112,38 @@ function replaceEmojis() {
 
     document.getElementById('output').innerHTML += '<p>' + username + ': ' + inputText + '</p>';
 
-/////////////////////////////////////////AJAX CALLS FOR DB (START)/////////////////////////////////////////
+    // AJAX CALLS FOR DB (START)
+    $.ajax({
+        url: '../backend/businesslogic/db/fetchuserid.php',
+        type: 'POST',
+        data: {
+            username: username,
+            userid: userid
+        },
+        success: function(response) {
+            console.log('User ID:', response); // Anzeigen der Benutzer-ID in der Konsole
+        },
+        error: function(xhr, status, error) {
+            console.error('Error inserting user:', error);
+        }
+    });
 
-    // AJAX-Aufruf, um die Userid zubekommen / zum Debuggen
-$.ajax({
-    url: '../backend/businesslogic/db/fetchuserid.php',
-    type: 'POST',
-    data: {
-        username: username,
-        userid: userid
-    },
-    success: function(response) {
-        console.log('User ID:', response); // Anzeigen der Benutzer-ID in der Konsole
-        // Fügen Sie hier ggf. weitere Aktionen hinzu
-    },
-    error: function(xhr, status, error) {
-        console.error('Error inserting user:', error);
-    }
-});
+    $.ajax({
+        url: '../backend/businesslogic/db/insertMessage.php',
+        type: 'POST',
+        data: {
+            message: inputText,
+            username: username
+        },
+        success: function(response) {
+            console.log('Message sent successfully:', response);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error sending message:', error);
+        }
+    });
+    // AJAX CALLS FOR DB (END)
 
-// AJAX-Aufruf, um die Nachricht einzufügen
-$.ajax({
-    url: '../backend/businesslogic/db/insertMessage.php',
-    type: 'POST',
-    data: {
-        message: inputText,
-        username: username
-    },
-    success: function(response) {
-        console.log('Message sent successfully:', response);
-        // Hier können Sie weitere Aktionen ausführen, wenn die Nachricht erfolgreich eingefügt wurde
-    },
-    error: function(xhr, status, error) {
-        console.error('Error sending message:', error);
-    }
-});
-
-/////////////////////////////////////////AJAX CALLS FOR DB (END)/////////////////////////////////////////
-    
     sendMessageToServer();
     document.getElementById('message').value = '';
 }
@@ -157,30 +164,54 @@ function closeSettings() {
 
 // Function to save settings (nickname and username color)
 function saveSettings() {
-    var newNickname = newNickname;
-    var nameColor = document.getElementById('chat-color').value;
+    let newNickname = document.getElementById('new-nickname').value;
+    let newNameColor = document.getElementById('name-color').value;
     
-    // Implement logic to save the new nickname and chat color
-    // For demonstration, just update the display with the new values
-    document.getElementById('username').textContent = newNickname;
-    document.getElementById('username').style.color = nameColor; // Set the color of the username
-    
-    // Update the username in the database
-    insert_username(newNickname);
-    // Update the username in session storage
-    sessionStorage.setItem('username', newNickname); // Store the username in session storage
-    //update username color in session storage
-    sessionStorage.setItem('nameColor', nameColor);
+    if (newNickname.trim() !== '' && newNickname !== username) {
+        // Update the username in session storage and on the UI
+        sessionStorage.setItem('username', newNickname);
+        username = newNickname;
+        document.getElementById('username').innerText = newNickname;
 
-    console.log('Name Color:', nameColor);
+        // Display the name change message in the chatroom
+        document.getElementById('output').innerHTML += `<p>${username} changed their name to ${newNickname}</p>`;
+        console.log(`${username} changed their name to ${newNickname}`);
 
-    // Display the name change message in the chatroom
-    var message = username + ' changed their name to ' + newNickname;
-    document.getElementById('output').innerHTML = message;
-    
-    // Log the name change message to the console
-    console.log(message);
-    
+        // AJAX call to update the username in the database
+        $.ajax({
+            url: '../backend/businesslogic/db/updateUsername.php',
+            type: 'POST',
+            data: {
+                oldUsername: sessionStorage.getItem('username'),
+                newUsername: newNickname
+            },
+            success: function(response) {
+                console.log('Username updated:', response);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error updating username:', error);
+            }
+        });
+    }
+
+    if (newNameColor !== nameColor) {
+        // Update the username color in session storage and on the UI
+        sessionStorage.setItem('nameColor', newNameColor);
+        nameColor = newNameColor;
+        document.getElementById('username').style.color = newNameColor;
+
+        // Display the color change message in the chatroom
+        document.getElementById('output').innerHTML += `<p>${username} changed their name color</p>`;
+        console.log(`${username} changed their name color`);
+    }
+
+    let theme = document.getElementById('theme-selector').value;
+    if (theme !== sessionStorage.getItem('theme')) {
+        // Update theme in session storage
+        sessionStorage.setItem('theme', theme);
+        changeForPersistedTheme(theme);
+    }
+
     // Close the settings popup
     closeSettings();
 }
