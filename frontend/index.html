@@ -42,17 +42,16 @@
             <input type="text" id="new-nickname" placeholder="Enter your new nickname">
             <label for="chat-color">Text Color:</label>
             <input type="color" id="chat-color" value="#000000">
-            <!-- Theme Selector Dropdown -->
-            <label for="theme-selector">Select Theme:</.m>
-                <select id="theme-selector" onchange="changeTheme()">
-                    <option value="light">Light</option>
-                    <option value="dark">Dark</option>
-                    <option value="red">Red</option>
-                    <option value="sakura">Sakura</option>
-                    <option value="blue">Blue</option>
-                </select>
-                <button onclick="saveSettings()">Save</button>
-                <button onclick="closeSettings()">Close</button>
+            <label for="theme-selector">Select Theme:</label>
+            <select id="theme-selector" onchange="changeTheme()">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="red">Red</option>
+                <option value="sakura">Sakura</option>
+                <option value="blue">Blue</option>
+            </select>
+            <button onclick="saveSettings()">Save</button>
+            <button onclick="closeSettings()">Close</button>
         </div>
     </div>
 
@@ -73,10 +72,10 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="tab1">
                     <ul class="list-group" id="users">
-                        <li class="list-item current">
+                        <div class="username">
                             <span id="username"></span>
-                            <!-- This gets filled with connected usernames by JS -->
-                        </li>
+                        </div>
+                        <!-- This gets filled with connected usernames by JS -->
                     </ul>
                 </div>
             </div>
@@ -86,7 +85,7 @@
     <div class="container bg-dark">
         <div class="input-container">
             <textarea class="input-field" id="message" rows="1" placeholder="Type your message..."></textarea>
-            <button class="btn send-button" id="send-button">Send</button> 
+            <button class="btn send-button" id="send-button">Send</button>
             <!-- <input type="text" id="message-input" placeholder="Type your message..."> -->
             <!--<button onclick="sendMessage()">Send</button>-->
         </div>

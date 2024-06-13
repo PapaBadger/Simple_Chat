@@ -164,8 +164,10 @@ function closeSettings() {
 
 // Function to save settings (nickname and username color)
 function saveSettings() {
-    let newNickname = document.getElementById('new-nickname').value;
-    let newNameColor = document.getElementById('name-color').value;
+    // Capture the new nickname and text color values from the form
+    var newNickname = document.getElementById('new-nickname').value;
+    var newColor = document.getElementById('chat-color').value;
+    var selectedTheme = document.getElementById('theme-selector').value;
     
     if (newNickname.trim() !== '' && newNickname !== username) {
         // Update the username in session storage and on the UI
@@ -214,6 +216,11 @@ function saveSettings() {
 
     // Close the settings popup
     closeSettings();
+}
+
+function closeSettings() {
+    // Hide the settings popup
+    document.getElementById('settings-popup').style.display = 'none';
 }
 
 // Call sendMessageToServer when the Enter key is pressed in the message input field
