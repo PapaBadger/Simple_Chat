@@ -84,7 +84,6 @@ body {
 .nav-tabs 
 .nav-link {
     border-radius: 0%;
-    color: #5b609b;
     font-weight: bold;
     overflow: hidden;
 }
@@ -93,14 +92,11 @@ body {
 .nav-tabs .nav-link.active {
     font-weight: bold;
     color: #e6e6e6;
-    border-color: #5b609b;
+    /* border-color: #5b609b; */
     border-width: 2px;
     border-radius: 0%;
 }
-.nav-tabs .nav-link:hover {
-    border-color: #5b609b;
-    border-width: 2px;
-}
+
 .send-button {
     /* background-color: #5b609b; */
     color: #e6e6e6;
