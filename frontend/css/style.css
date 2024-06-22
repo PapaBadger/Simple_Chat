@@ -7,7 +7,6 @@ body {
     background-image: url('img/bg.jpeg');
     background-position: center;
     background-size: auto;
-
 }
 
 .container {
@@ -188,4 +187,18 @@ body {
 
 .settings-content button:hover {
     background-color: #464c8d;
+}
+
+/* Text color */
+
+:root {
+    --text-color: #333333; /* Default color, can change as per design preference */
+}
+
+.chat-container, .settings-popup {
+    color: var(--text-color); /* Apply color to text using the CSS variable */
+}
+
+#output p {
+    color: var(--text-color); /* Assuming --text-text-color is a global variable for text color */
 }
