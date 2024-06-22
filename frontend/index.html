@@ -37,10 +37,11 @@
     <div id="settings-popup" class="settings-popup" style="display: none;">
         <div class="settings-content">
             <h2>Settings</h2>
-            <label for="new-nickname">New Nickname:</label>
-            <input type="text" id="new-nickname" placeholder="Enter your new nickname">
-            <label for="chat-color">Text Color:</label>
-            <input type="color" id="chat-color" value="#000000">
+
+            <label for="message-text-color-picker">Message Text Color:</label>
+            <input type="color" id="message-text-color-picker" value="#ff0000"
+                onchange="updateMessageTextColor(this.value)">
+
             <label for="theme-selector">Select Theme:</label>
             <select id="theme-selector" onchange="changeTheme()">
                 <option value="light">Light</option>
@@ -49,7 +50,7 @@
                 <option value="sakura">Sakura</option>
                 <option value="blue">Blue</option>
             </select>
-            <button onclick="saveSettings()">Save</button>
+            <br><br>
             <button onclick="closeSettings()">Close</button>
         </div>
     </div>
@@ -66,22 +67,22 @@
         <div class="tabs">
             <div class="nav nav-tabs" id="myTabs">
                 <div class="nav-item">
-                    <a class="nav-link active" href="#tab1" data-toggle="tab">Members</a>
+                    <p> Members </p>
                 </div>
             </div>
             <div class="tab-content">
-                <div class="tab-pane active" id="tab1">
-                    <ul class="list-group" id="users">
-                        <div class="username">
-                            <span id="username"></span>
-                        </div>
-                        <did>
+                <!-- <div class="tab-pane active" id="tab1"> -->
+                <ul class="list-group" id="users">
+                    <div class="username">
+                        <span id="username"></span>
+                    </div>
+                    <did>
                         <!-- This gets filled with connected usernames by JS -->
-                        </did>
-                    </ul>
-                </div>
+                    </did>
+                </ul>
             </div>
         </div>
+    </div>
     </div>
 
     <div class="container bg-dark">

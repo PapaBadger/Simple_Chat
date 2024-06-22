@@ -72,6 +72,42 @@ function init() {
 
 document.addEventListener('DOMContentLoaded', init);
 
+
+// Function to apply the selected text color
+function changeForPersistedTextColor(color) {
+    // Use CSS variable to control text color globally
+    document.documentElement.style.setProperty('--text-color', color);
+    sessionStorage.setItem('textColor', color); // Save the color in sessionStorage
+}
+
+function changeTextColor() {
+    let textColor = document.getElementById('text-color-picker').value;
+    changeForPersistedTextColor(textColor);
+}
+
+// Function to load the persisted text color on page load
+function loadPersistedTextColor() {
+    let savedColor = sessionStorage.getItem('textColor') || '#333333'; // Default color if none saved
+    document.documentElement.style.setProperty('--text-color', savedColor);
+}
+
+// Set up event listener for page load to load persisted settings
+document.addEventListener('DOMContentLoaded', function() {
+    loadPersistedTextColor(); // Load text color when the document loads
+});
+
+function updateMessageTextColor(color) {
+    document.documentElement.style.setProperty('--text-color', color);
+    sessionStorage.setItem('messageTextColor', color); // Optionally save the color to sessionStorage
+}
+
+function loadMessageTextColor() {
+    let savedColor = sessionStorage.getItem('messageTextColor') || '#ff0000'; // Default to red if nothing saved
+    document.documentElement.style.setProperty('--text-color', savedNumber);
+}
+
+document.addEventListener('DOMContentLoaded', loadMessageTextColor);
+
 // Function to change theme
 function changeForPersistedTheme(theme) {
     document.body.classList.remove('light', 'dark', 'red', 'sakura', 'blue'); // Clean all theme classes
