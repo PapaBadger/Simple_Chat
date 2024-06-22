@@ -114,7 +114,7 @@ $(document).ready(function () {
                 console.log('Received whisper from', sanitizedUsername, 'to', sanitizedTarget, 'current username is', currentUsername);
             
                 if (sanitizedTarget === currentUsername) {
-                    $('#output').append('<p><strong>' + sanitizedUsername + ' (whisper):</strong> ' + sanitizedText + '</p>');
+                    $('#output').append('<p style="color: #39FF14;"><strong>' + sanitizedUsername + ' (whisper):</strong> ' + sanitizedText + '</p>');
                 }
             }
         } catch (error) {
