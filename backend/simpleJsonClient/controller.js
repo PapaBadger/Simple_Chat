@@ -6,6 +6,8 @@ $(document).ready(function () {
         console.log('Connection established!');
         var username = $('#username').text();
         console.log('Username: ', username); // Add this line
+        console.log('Calling chathistory...');
+        chathistory();
 
         // Send a 'newUser' message right after the connection is established
         conn.send(JSON.stringify({
@@ -122,3 +124,29 @@ $(document).ready(function () {
         }
     };  
 });
+
+function chathistory() {
+    $.ajax({
+        url: '../backend/businesslogic/db/chathistory.php',
+        type: 'POST',
+        dataType: 'json',
+        success: function(response) {
+            console.log('User Data:', response);
+    
+            let userList = $('#userList'); 
+            userList.empty(); // Vorherige Inhalte löschen
+    
+            // Iteriere über jedes Objekt in der response
+            response.forEach(function(item) {
+                $('#output').append('<p><strong>' + item.username + ':</strong> ' + item.message + '</p>');
+                console.log("Der Benutzername: ", item.username); 
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error('Fehler beim Abrufen der Benutzerdaten:', error);
+        }
+    });
+    
+}
+
+

@@ -43,7 +43,7 @@
             <label for="chat-color">Text Color:</label>
             <input type="color" id="chat-color" value="#000000">
             <!-- Theme Selector Dropdown -->
-            <label for="theme-selector">Select Theme:</.m>
+            <label for="theme-selector">Select Theme:</label>
                 <select id="theme-selector" onchange="changeTheme()">
                     <option value="light">Light</option>
                     <option value="dark">Dark</option>
@@ -59,6 +59,7 @@
     <div class="container bg-dark">
         <div class="chat-container" id="chat-container">
             <div class="messages">
+                <ul id="userList"></ul>
                 <!-- Messages will be displayed here -->
                 <!-- test for outputs -->
                 <div id="output" contenteditable="true"></div>

@@ -2,6 +2,10 @@ let username = sessionStorage.getItem('username'); // Retrieve username from ses
 let nameColor = sessionStorage.getItem('nameColor'); // Retrieve chat color from session storage
 let userid = sessionStorage.getItem('userid');
 
+$(document).ready(function() {
+    saveSettings();
+});
+
 function askUsername() {
     while (!username || username.trim() === '') {
         username = prompt('Please enter your username to proceed:');
@@ -26,7 +30,7 @@ function init() {
             username: username
         },
         success: function(response) {
-            console.log('User Data:', response); // Anzeigen der Benutzer-ID in der Konsole
+            console.log('aaaUser Data:', response); // Anzeigen der Benutzer-ID in der Konsole
         },
         error: function(xhr, status, error) {
             console.error('Error inserting user:', error);
@@ -103,7 +107,7 @@ function replaceEmojis() {
     };
 
     let inputText = document.getElementById('message').value;
-    let username = document.getElementById('username').textContent;
+    username = document.getElementById('username').textContent;
 
     for (let text in emojiMap) {
         let regex = new RegExp(escapeRegExp(text), 'g');
@@ -169,6 +173,7 @@ function saveSettings() {
     
     if (newNickname.trim() !== '' && newNickname !== username) {
         // Update the username in session storage and on the UI
+        newNickname = username;
         sessionStorage.setItem('username', newNickname);
         username = newNickname;
         document.getElementById('username').innerText = newNickname;
@@ -176,22 +181,6 @@ function saveSettings() {
         // Display the name change message in the chatroom
         document.getElementById('output').innerHTML += `<p>${username} changed their name to ${newNickname}</p>`;
         console.log(`${username} changed their name to ${newNickname}`);
-
-        // AJAX call to update the username in the database
-        $.ajax({
-            url: '../backend/businesslogic/db/updateUsername.php',
-            type: 'POST',
-            data: {
-                oldUsername: sessionStorage.getItem('username'),
-                newUsername: newNickname
-            },
-            success: function(response) {
-                console.log('Username updated:', response);
-            },
-            error: function(xhr, status, error) {
-                console.error('Error updating username:', error);
-            }
-        });
     }
 
     if (newNameColor !== nameColor) {
