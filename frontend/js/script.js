@@ -158,20 +158,12 @@ function closeSettings() {
 }
 
 function saveSettings() {
-<<<<<<< HEAD
     // Capture the new nickname and text color values from the form
     var newNickname = document.getElementById('new-nickname').value;
     var newColor = document.getElementById('chat-color').value;
     var selectedTheme = document.getElementById('theme-selector').value;
     
     if (newNickname.trim() !== '' && newNickname !== username) {
-=======
-    // Collect new settings
-    let newNickname = document.getElementById('new-nickname').value.trim();
-    let newNameColor = document.getElementById('chat-color').value;
-
-    if (newNickname && newNickname !== username) {
->>>>>>> fdbf784577b759246c11b8f6949ce6931431c8e1
         // Update the username in session storage and on the UI
         sessionStorage.setItem('username', newNickname);
         document.getElementById('username').innerText = newNickname;
