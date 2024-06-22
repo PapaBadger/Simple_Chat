@@ -141,6 +141,21 @@ function replaceEmojis() {
             console.error('Error inserting user:', error);
         }
     });
+
+    $.ajax({
+        url: '../backend/businesslogic/db/insertMessage.php',
+        type: 'POST',
+        data: {
+            message: inputText,
+            username: username
+        },
+        success: function(response) {
+            console.log('Message sent successfully:', response);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error sending message:', error);
+        }
+    });
     // AJAX CALLS FOR DB (END)
 
     sendMessageToServer();
@@ -174,25 +189,6 @@ function saveSettings() {
         document.getElementById('username').innerText = newNickname;
         username = newNickname;
 
-        // Make an AJAX call to update the username in the database
-        $.ajax({
-            url: '../backend/businesslogic/db/updateUsername.php',
-            type: 'POST',
-            data: { 
-                user_id: userid, 
-                new_username: newNickname 
-            },
-            success: function(response) {
-                console.log('Username updated:', response);
-            },
-            error: function(xhr, status, error) {
-                console.error('Error updating username:', error);
-            }
-        });
-        sendUpdateMessage(`${username} changed their username to ${newNickname}`);
-        console.log(`${username} changed their username to ${newNickname}`);
-    }
-
     if (newNameColor && newNameColor !== nameColor) {
         // Update the username color in session storage and on the UI
         sessionStorage.setItem('nameColor', newNameColor);
@@ -215,6 +211,7 @@ function saveSettings() {
     // Close the settings popup
     closeSettings();   
 }
+}
 
 function closeSettings() {
     // Hide the settings popup
@@ -223,7 +220,7 @@ function closeSettings() {
 
 // Call sendMessageToServer when the Enter key is pressed in the message input field
 $('#message').keypress(function(e) {
-    if (e.which == 13 && !e.shiftKey) { // 13 is the ASCII code for the Enter key
+    if (e.which == 13) { // 13 is the ASCII code for the Enter key
         e.preventDefault(); // Prevent the default action (submitting the form)
         sendMessageToServer();
     }

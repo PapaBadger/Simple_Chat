@@ -132,10 +132,10 @@ function chathistory() {
         dataType: 'json',
         success: function(response) {
             console.log('User Data:', response);
-    
+
             let userList = $('#userList'); 
             userList.empty(); // Vorherige Inhalte löschen
-    
+
             // Iteriere über jedes Objekt in der response
             response.forEach(function(item) {
                 $('#output').append('<p><strong>' + item.username + ':</strong> ' + item.message + '</p>');
@@ -146,7 +146,8 @@ function chathistory() {
             console.error('Fehler beim Abrufen der Benutzerdaten:', error);
         }
     });
-    
+
 }
+
 
 
