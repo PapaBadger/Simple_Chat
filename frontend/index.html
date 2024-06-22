@@ -37,18 +37,16 @@
     <div id="settings-popup" class="settings-popup" style="display: none;">
         <div class="settings-content">
             <h2>Settings</h2>
-            <label for="new-nickname">New Nickname:</label>
-            <input type="text" id="new-nickname" placeholder="Enter your new nickname">
             <label for="chat-color">Text Color:</label>
-            <input type="color" id="chat-color" value="#000000">
+<input type:="color" id="chat-color" value="#000000">
             <label for="theme-selector">Select Theme:</label>
             <select id="theme-selector" onchange="changeTheme()">
                 <option value="light">Light</option>
                 <option value="dark">Dark</option>
                 <option value="red">Red</option>
                 <option value="sakura">Sakura</option>
-                <option value="blue">Blue</option>
             </select>
+            <br><br>
             <button onclick="saveSettings()">Save</button>
             <button onclick="closeSettings()">Close</button>
         </div>
@@ -88,8 +86,6 @@
         <div class="input-container">
             <textarea class="input-field" id="message" rows="1" placeholder="Type your message..."></textarea>
             <button class="btn send-button" id="send-button">Send</button>
-            <!-- <input type="text" id="message-input" placeholder="Type your message..."> -->
-            <!--<button onclick="sendMessage()">Send</button>-->
         </div>
     </div>
 
