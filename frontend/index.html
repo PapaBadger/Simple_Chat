@@ -5,8 +5,7 @@
     <title>Chatroom</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/themes.css">
 </head>
@@ -14,7 +13,7 @@
 <body>
     <div class="pt-3">
         <div class="container bg-dark">
-            <nav class="navbar navbar-expandhi-lg navbar-dark bg-dark">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a class="navbar-brand" href="./index.html">Chatroom</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,6 +41,10 @@
             <input type="text" id="new-nickname" placeholder="Enter your new nickname">
             <label for="chat-color">Text Color:</label>
             <input type="color" id="chat-color" value="#000000">
+<<<<<<< HEAD
+=======
+            <!-- Theme Selector Dropdown -->
+>>>>>>> fdbf784577b759246c11b8f6949ce6931431c8e1
             <label for="theme-selector">Select Theme:</label>
             <select id="theme-selector" onchange="changeTheme()">
                 <option value="light">Light</option>
@@ -50,7 +53,11 @@
                 <option value="sakura">Sakura</option>
                 <option value="blue">Blue</option>
             </select>
+<<<<<<< HEAD
             <button onclick="saveSettings()">Save</button>
+=======
+            <button id="save-settings-button">Save</button>
+>>>>>>> fdbf784577b759246c11b8f6949ce6931431c8e1
             <button onclick="closeSettings()">Close</button>
         </div>
     </div>
@@ -60,7 +67,7 @@
             <div class="messages">
                 <!-- Messages will be displayed here -->
                 <!-- test for outputs -->
-                <div id="output" contenteditable="true"></div>
+                <div id="output"></div>
             </div>
         </div>
         <div class="tabs">
@@ -85,9 +92,13 @@
     <div class="container bg-dark">
         <div class="input-container">
             <textarea class="input-field" id="message" rows="1" placeholder="Type your message..."></textarea>
+<<<<<<< HEAD
             <button class="btn send-button" id="send-button">Send</button>
             <!-- <input type="text" id="message-input" placeholder="Type your message..."> -->
             <!--<button onclick="sendMessage()">Send</button>-->
+=======
+            <button class="btn send-button" id="send-button">Send</button> 
+>>>>>>> fdbf784577b759246c11b8f6949ce6931431c8e1
         </div>
     </div>
 
